@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Loi organique 13/011-B</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1e3a5f">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#1d2430;--mute:#6b7280;--pri:#1e3a5f;--acc:#c9a227;--line:#e3dccb;--y:#fde68a;--g:#bbf7d0;--b:#bfdbfe;--r:#fecaca;--fs:18px}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--card:#18202b;--ink:#e8e6e1;--mute:#9aa3b0;--pri:#7aa7e0;--acc:#e0b83d;--line:#2a3442;--y:#6b5a1a;--g:#1d5a36;--b:#1f4a7a;--r:#7a2a2a}}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif;padding-top:env(safe-area-inset-top);padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:20;background:var(--pri);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;margin-top:calc(-1*env(safe-area-inset-top));display:flex;gap:8px;align-items:center}
+header h1{font-size:16px;margin:0;flex:1;font-weight:600}
+header button{background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-size:15px}
+main{max-width:760px;margin:0 auto;padding:12px 14px}
+.view{display:none}.view.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.daily{border-left:4px solid var(--acc)}.daily small{color:var(--acc);font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.daily q{display:block;font:italic var(--fs)/1.5 Georgia,serif;margin:6px 0 10px;quotes:none}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:8px 12px;font-size:14px}
+.btn.p{background:var(--pri);color:#fff;border-color:var(--pri)}
+h2.h{margin:26px 0 6px;color:var(--pri);font-family:Georgia,serif}
+h2.l1{font-size:20px;border-bottom:2px solid var(--acc);padding-bottom:4px}h2.l2{font-size:18px}h2.l3{font-size:16px}h2.l4{font-size:14px;color:var(--mute)}
+article{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0;scroll-margin-top:70px}
+article.flash{outline:3px solid var(--acc)}
+article>b{display:block;color:var(--pri);font-size:14px;margin-bottom:4px}
+article p{margin:.45em 0;font:var(--fs)/1.65 Georgia,'Times New Roman',serif;-webkit-touch-callout:none}
+mark{border-radius:3px;padding:0 1px;color:inherit}.c-y{background:var(--y)}.c-g{background:var(--g)}.c-b{background:var(--b)}.c-r{background:var(--r)}
+mark.has-note{border-bottom:2px dotted var(--pri);cursor:pointer}
+input[type=search]{width:100%;font-size:17px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.res{cursor:pointer}.res b{color:var(--pri)}.res em{background:var(--y);font-style:normal;color:inherit}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;border:0;background:none;color:var(--mute);padding:10px 0;font-size:12px}nav button.on{color:var(--pri);font-weight:700}
+nav span{display:block;font-size:20px}
+#bar{position:fixed;left:0;right:0;bottom:calc(60px + env(safe-area-inset-bottom));z-index:40;display:none;justify-content:center;gap:8px;padding:8px}
+#bar.on{display:flex}#bar div{background:var(--card);border:1px solid var(--line);box-shadow:0 4px 18px #0004;border-radius:14px;padding:8px;display:flex;gap:8px;align-items:center}
+.sw{width:32px;height:32px;border-radius:50%;border:2px solid var(--line)}
+#drawer{position:fixed;inset:0;z-index:50;background:#0008;display:none}#drawer.on{display:block}
+#drawer aside{background:var(--card);width:min(86vw,360px);height:100%;overflow:auto;padding:calc(14px + env(safe-area-inset-top)) 14px}
+#drawer a{display:block;padding:7px 4px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);font-size:14px}
+#drawer a.h1{font-weight:700;color:var(--pri);margin-top:10px}#drawer a.h2{font-weight:600;padding-left:10px}#drawer a.h3,#drawer a.h4{padding-left:20px;color:var(--mute)}#drawer a.art{padding-left:30px}
+.note{border-left:4px solid var(--acc);cursor:pointer}.note q{display:block;font:italic 15px Georgia,serif;quotes:none;margin:4px 0}
+dialog{border:0;border-radius:16px;background:var(--card);color:var(--ink);width:min(92vw,420px);padding:16px}
+dialog::backdrop{background:#0007}textarea{width:100%;min-height:90px;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.mute{color:var(--mute);font-size:13px}
+
+body.locked>header,body.locked>main,body.locked>nav,body.locked>#bar{display:none}
+body.locked{padding:0}
+#gate{position:fixed;inset:0;z-index:100;overflow:auto;background:radial-gradient(circle at 30% 20%,#1b3355,#0b1522);color:#f3ead2;display:none}
+body.locked #gate{display:block}
+.book{min-height:100%;display:flex;align-items:center;justify-content:center;padding:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom))}
+.cover{position:relative;width:min(100%,460px);min-height:min(88vh,740px);border-radius:6px 16px 16px 6px;background:linear-gradient(135deg,#1e3a5f,#12233b 70%);box-shadow:0 22px 50px #000b,inset 0 0 0 1px #ffffff14;padding:40px 30px 28px 48px;display:flex;flex-direction:column;text-align:center}
+.cover:before{content:"";position:absolute;left:0;top:0;bottom:0;width:22px;background:linear-gradient(90deg,#0a1626,#1b3355);border-radius:6px 0 0 6px;box-shadow:inset -3px 0 6px #0006}
+.cover:after{content:"";position:absolute;inset:14px 14px 14px 34px;border:2px solid #d4af37;border-radius:4px;outline:1px solid #d4af3755;outline-offset:4px;pointer-events:none}
+.rdc{letter-spacing:.22em;font-size:11px;color:#d4af37}
+.orn{color:#d4af37;font-size:22px;margin:10px 0}
+.big{font:700 42px/1.05 Georgia,serif;color:#f3ead2;margin:14px 0 6px;letter-spacing:.04em}
+.num{font:italic 20px Georgia,serif;color:#d4af37}
+.sub{font:16px/1.45 Georgia,serif;margin:6px 0 18px}
+.refs{margin-top:auto;font-size:12.5px;line-height:1.65;color:#d9cfb4;border-top:1px solid #d4af3766;padding-top:12px}
+.refs b{color:#d4af37;display:block;letter-spacing:.14em;font-size:11px;margin-bottom:4px}
+.gbtn{background:#d4af37;color:#1b2433;border:0;border-radius:10px;padding:13px 24px;font:700 16px Georgia,serif;margin-top:16px}
+.glink{background:none;border:0;color:#9fb3cf;font-size:12px;margin-top:10px;text-decoration:underline}
+.panel{width:min(100%,460px);background:var(--card);color:var(--ink);border-radius:16px;padding:20px;box-shadow:0 20px 50px #000a}
+.panel h2{margin:0 0 6px;color:var(--pri);font-family:Georgia,serif}
+.panel input[type=text],.panel input[type=password]{width:100%;font-size:17px;padding:12px;margin:6px 0 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.panel label{font-size:13px;color:var(--mute);font-weight:600}
+.homes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 14px}
+.homes label{border:1px solid var(--line);border-radius:10px;padding:11px 0;text-align:center;color:var(--ink);font-size:15px}
+.homes input{display:none}.homes label:has(input:checked){background:var(--pri);color:#fff;border-color:var(--pri)}
+.u{border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:var(--bg)}
+.tag{font-size:11px;border-radius:8px;padding:2px 8px;background:var(--line);margin-left:6px;color:#222}
+.st-pending{background:#fde68a}.st-approved{background:#bbf7d0}.st-rejected,.st-revoked{background:#fecaca}
+.err{color:#b91c1c;font-size:13px}
+
+header{background:linear-gradient(135deg,#1e3a5f,#0f766e)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.dc{background:linear-gradient(150deg,var(--card),var(--bg));border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:6px;cursor:pointer;box-shadow:0 8px 22px #0001;transition:transform .15s}.dc:active{transform:scale(.97)}
+.dc.soon{opacity:.5;cursor:default}.ic{font-size:30px}.dc b{font-size:15px;line-height:1.25}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 12px;font-size:13px;text-align:left}
+.codef{width:100%;font:700 20px ui-monospace,monospace;letter-spacing:.12em;text-align:center;padding:12px;border-radius:12px;border:2px dashed var(--acc);background:var(--bg);color:var(--ink);margin:8px 0}
+.refin{width:100%;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin:6px 0}
+.m{max-width:88%;padding:10px 13px;border-radius:16px;margin:8px 0;white-space:pre-wrap;font-size:15px;line-height:1.5}
+.mu{background:var(--pri);color:#fff;margin-left:auto;border-bottom-right-radius:4px}.ma{background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
+.askbar{position:sticky;bottom:calc(66px + env(safe-area-inset-bottom));display:flex;gap:8px;background:var(--bg);padding:8px 0}.askbar input{flex:1;font-size:16px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+</style></head><body class="locked"><div id="gate"></div>
+<header><button id="menu" aria-label="Sommaire">☰</button><h1>Loi organique 13/011-B</h1><button id="fm">A−</button><button id="fp">A+</button></header>
+<main>
+<section id="v-lib" class="view on"><div id="daily"></div><div id="sug"></div><div id="lib"></div></section><section id="v-lire" class="view"><div id="doc"></div></section><section id="v-ai" class="view"></section><section id="v-me" class="view"></section>
+<section id="v-search" class="view"><input id="q" type="search" placeholder="Rechercher un mot, une expression…" autocomplete="off"><div id="results" class="mute" style="margin-top:10px">Tapez au moins 2 lettres.</div></section>
+<section id="v-notes" class="view"><div id="notes"></div>
+<div class="row" style="margin-top:14px"><button class="btn" id="exp">Exporter mes annotations</button><label class="btn">Importer<input id="imp" type="file" accept="application/json" hidden></label></div>
+<p class="mute">Vos surlignages et commentaires sont enregistrés sur cet appareil. Le texte de la loi est en lecture seule.</p></section>
+</main>
+<div id="bar"><div>
+<button class="sw c-y" data-c="y" aria-label="Jaune"></button><button class="sw c-g" data-c="g" aria-label="Vert"></button><button class="sw c-b" data-c="b" aria-label="Bleu"></button><button class="sw c-r" data-c="r" aria-label="Rouge"></button>
+<button class="btn" id="addnote">💬 Commenter</button></div></div>
+<nav><button data-v="lib" class="on"><span>📚</span>Biblio</button><button data-v="search"><span>🔍</span>Chercher</button><button data-v="ai"><span>✨</span>Assistant</button><button data-v="notes"><span>✏️</span>Notes</button><button data-v="me"><span>👤</span>Moi</button></nav>
+<div id="drawer"><aside id="toc"></aside></div>
+<dialog id="dlg"><div id="dq" class="mute"></div><textarea id="dt" placeholder="Votre commentaire…"></textarea>
+<div class="row" style="margin-top:10px"><button class="btn p" id="ds">Enregistrer</button><button class="btn" id="dd">Supprimer le surlignage</button><button class="btn" id="dc">Fermer</button></div></dialog>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+let D,A=[],ann=[];const K='ann_loi_v1';
+try{ann=JSON.parse(localStorage.getItem(K)||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(ann))}catch(e){}};
+let fs=+(localStorage.getItem('fs')||18);const setfs=()=>document.documentElement.style.setProperty('--fs',fs+'px');setfs();
+$('#fm').onclick=()=>{fs=Math.max(14,fs-1);localStorage.setItem('fs',fs);setfs()};
+$('#fp').onclick=()=>{fs=Math.min(28,fs+1);localStorage.setItem('fs',fs);setfs()};
+function show(v){$$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));if(v==='notes')renderNotes();if(v==='me')renderMe();if(v==='ai')aiInit();if(v==='lib')renderLib();hideBar()}
+$$('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
+function go(id){if(id.includes(':')&&(!D||D.id!==id.split(':')[0]))openDoc(id.split(':')[0]);show('lire');$('#drawer').classList.remove('on');const el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)}}
+function paraHTML(a,pi){const t=a.p[pi];const segs=[];ann.forEach(n=>n.segs.forEach(s=>{if(s.a===a.gid&&s.p===pi)segs.push({s:s.s,e:s.e,n})}));
+ if(!segs.length)return esc(t);const cuts=new Set([0,t.length]);segs.forEach(g=>{cuts.add(g.s);cuts.add(Math.min(g.e,t.length))});
+ const c=[...cuts].sort((x,y)=>x-y);let h='';for(let i=0;i<c.length-1;i++){const x=c[i],y=c[i+1];const cov=segs.filter(g=>g.s<=x&&g.e>=y);const part=esc(t.slice(x,y));
+  if(!cov.length)h+=part;else{const n=cov[cov.length-1].n;h+=`<mark class="c-${n.c}${n.note?' has-note':''}" data-id="${n.id}">${part}</mark>`}}return h}
+function renderArt(a){return `<article id="${a.gid}" data-a="${a.gid}"><b>${esc(a.n)}</b>${a.p.map((_,i)=>`<p data-p="${i}">${paraHTML(a,i)}</p>`).join('')}</article>`}
+function renderDoc(){$('#doc').innerHTML=`<h1 style="font:700 24px Georgia,serif;color:var(--pri);margin:6px 0">${esc(D.title)}</h1>`+D.items.map(x=>x.t==='h'?`<h2 class="h l${x.lvl}" id="h${x.i}">${esc(x.text)}</h2>`:renderArt(x)).join('')}
+function refreshArt(id){const a=ALL.find(x=>x.gid===id),el=document.getElementById(id);if(!el)return;el.querySelectorAll('p').forEach(p=>p.innerHTML=paraHTML(a,+p.dataset.p))}
+function daily(){const d=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/864e5);const pool=ALL.filter(a=>!a.annex&&a.p.join(' ').length>90);const a=pool[(d*7919)%pool.length];
+ const txt=a.p.join(' ');const q=txt.length>260?txt.slice(0,257).replace(/\s+\S*$/,'')+'…':txt;
+ $('#daily').innerHTML=`<div class="card daily"><small>Article du jour · ${new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long'})}</small><q>« ${esc(q)} »</q><div class="row"><span class="mute" style="align-self:center">${esc(a.dt)} · ${esc(a.n)}</span><button class="btn p" id="dgo">Lire l'article</button><button class="btn" id="dsh">Partager</button></div></div>`;
+ $('#dgo').onclick=()=>go(a.gid);
+ $('#dsh').onclick=()=>{const t=`« ${q} » — ${a.n}, ${D.title}`;navigator.share?navigator.share({text:t}).catch(()=>{}):navigator.clipboard&&navigator.clipboard.writeText(t)}}
+function toc(){let h='';D.items.forEach(x=>{h+=x.t==='h'?`<a class="h${x.lvl}" data-g="h${x.i}">${esc(x.text)}</a>`:`<a class="art" data-g="${x.gid}">${esc(x.n)}</a>`});$('#toc').innerHTML=h;$$('#toc a').forEach(a=>a.onclick=()=>go(a.dataset.g))}
+$('#menu').onclick=()=>$('#drawer').classList.add('on');$('#drawer').onclick=e=>{if(e.target.id==='drawer')e.target.classList.remove('on')};
+/* recherche */
+$('#q').oninput=()=>{const q=norm($('#q').value.trim());const R=$('#results');if(q.length<2){R.className='mute';R.textContent='Tapez au moins 2 lettres.';return}
+ let out=[],n=0;for(const a of ALL){const t=a.p.join(' ');const nt=norm(t);let i=nt.indexOf(q);if(i<0)continue;n++;if(out.length>=60)continue;
+  const s=Math.max(0,i-60),e=Math.min(t.length,i+q.length+100);out.push(`<div class="card res" data-g="${a.gid}"><b>${esc(a.dt)} · ${esc(a.n)}</b><br>${s?'…':''}${esc(t.slice(s,i))}<em>${esc(t.slice(i,i+q.length))}</em>${esc(t.slice(i+q.length,e))}${e<t.length?'…':''}</div>`)}
+ R.className='';R.innerHTML=`<p class="mute">${n} article${n>1?'s':''} trouvé${n>1?'s':''}</p>`+out.join('');$$('.res').forEach(r=>r.onclick=()=>go(r.dataset.g))};
+/* surlignage */
+let sel=null;const bar=$('#bar');function hideBar(){bar.classList.remove('on');sel=null}
+function offs(p,node,o){const r=document.createRange();r.selectNodeContents(p);r.setEnd(node,o);return r.toString().length}
+document.addEventListener('selectionchange',()=>{clearTimeout(window._t);window._t=setTimeout(()=>{const s=getSelection();if(!s||s.isCollapsed||!s.rangeCount){hideBar();return}
+ const r=s.getRangeAt(0);const ps=[...$('#doc').querySelectorAll('p')].filter(p=>r.intersectsNode(p));if(!ps.length||!$('#doc').contains(r.commonAncestorContainer)){hideBar();return}
+ const segs=[];ps.forEach(p=>{const pr=document.createRange();pr.selectNodeContents(p);let st=0,en=p.textContent.length;
+  if(p.contains(r.startContainer))st=offs(p,r.startContainer,r.startOffset);if(p.contains(r.endContainer))en=offs(p,r.endContainer,r.endOffset);
+  if(en>st)segs.push({a:p.parentElement.dataset.a,p:+p.dataset.p,s:st,e:en})});
+ if(!segs.length){hideBar();return}sel={segs,text:s.toString().trim()};bar.classList.add('on')},250)});
+function addAnn(c,note){if(!sel)return;const id='n'+Date.now();ann.push({id,c,note:note||'',text:sel.text,segs:sel.segs,t:Date.now()});save();
+ [...new Set(sel.segs.map(s=>s.a))].forEach(refreshArt);getSelection().removeAllRanges();hideBar()}
+$$('.sw').forEach(b=>b.onclick=()=>addAnn(b.dataset.c));
+let cur=null;
+$('#addnote').onclick=()=>{if(!sel)return;const s=sel;openDlg(null,s)};
+function openDlg(n,s){cur=n;$('#dq').textContent='« '+(n?n.text:s.text).slice(0,200)+' »';$('#dt').value=n?n.note:'';$('#dd').style.display=n?'':'none';$('#dlg').showModal();$('#dlg')._s=s}
+$('#ds').onclick=()=>{const v=$('#dt').value.trim();if(cur){cur.note=v;save();cur.segs.forEach(s=>refreshArt(s.a))}else{sel=$('#dlg')._s;addAnn('y',v)}$('#dlg').close();renderNotes()};
+$('#dd').onclick=()=>{if(cur){ann=ann.filter(x=>x!==cur);save();const ids=cur.segs.map(s=>s.a);[...new Set(ids)].forEach(refreshArt)}$('#dlg').close();renderNotes()};
+$('#dc').onclick=()=>$('#dlg').close();
+$('#doc').addEventListener('click',e=>{const m=e.target.closest('mark');if(m&&getSelection().isCollapsed){const n=ann.find(x=>x.id===m.dataset.id);if(n)openDlg(n)}});
+function renderNotes(){const N=$('#notes');if(!ann.length){N.innerHTML='<p class="mute">Aucune annotation. Sélectionnez un passage dans la loi pour le surligner ou le commenter.</p>';return}
+ N.innerHTML=[...ann].sort((a,b)=>b.t-a.t).map(n=>`<div class="card note" data-id="${n.id}"><b>${esc((ALL.find(a=>a.gid===n.segs[0].a)||{n:'?'}).n)}</b><q><mark class="c-${n.c}">${esc(n.text.slice(0,220))}</mark></q>${n.note?'<div>💬 '+esc(n.note)+'</div>':''}<div class="row" style="margin-top:8px"><button class="btn" data-go="${n.segs[0].a}">Aller au texte</button><button class="btn" data-ed="${n.id}">Modifier</button></div></div>`).join('');
+ $$('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));$$('[data-ed]').forEach(b=>b.onclick=()=>openDlg(ann.find(x=>x.id===b.dataset.ed)))}
+$('#exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(ann,null,1)],{type:'application/json'}));a.download='annotations-loi.json';a.click()};
+$('#imp').onchange=async e=>{try{const j=JSON.parse(await e.target.files[0].text());if(Array.isArray(j)){const ids=new Set(ann.map(x=>x.id));j.forEach(x=>{if(x&&x.id&&x.segs&&!ids.has(x.id))ann.push(x)});save();renderDoc();renderNotes()}}catch(_){alert('Fichier invalide')}};
+/* accès */
+const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const post=(p,b,h)=>fetch('/api/'+p,{method:'POST',headers:Object.assign({'content-type':'application/json'},h||{}),body:JSON.stringify(b)}).then(r=>r.json().then(j=>Object.assign(j,{_s:r.status})));
+let me=ld('me'),poll=null;
+const G=h=>{clearInterval(poll);$('#gate').innerHTML=h;$('#gate').scrollTop=0};
+const pm=t=>{const e=$('#pm');if(e)e.textContent=t};
+function initApp(d){docs=d.docs;ALL=[];docs.forEach(doc=>{let k=0;(doc.items||[]).forEach(x=>{if(x.t==='h')x.i=k++;else{x.gid=doc.id+':'+x.id;x.did=doc.id;x.dt=doc.title;x.annex=!!doc.parent;ALL.push(x)}})});document.body.classList.remove('locked');daily();renderLib();show('lib');sugLoad()}
+function cover(){G(`<div class="book"><div class="cover">
+<div class="rdc">RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</div><div class="orn">✦</div>
+<div class="big">LOI<br>ORGANIQUE</div><div class="num">n° 13/011-B du 11 avril 2013</div><div class="orn">❖</div>
+<div class="sub">portant organisation, fonctionnement et compétences des juridictions de l'ordre judiciaire</div>
+<div class="refs"><b>RÉFÉRENCES</b>Constitution du 18 février 2006 · Art. 149, 153 et 156<br>Titre I : Organisation et fonctionnement<br>Titre II : Compétence judiciaire<br>Titre III : Dispositions transitoires et finales<br><br>Promulguée à Kinshasa, le 11 avril 2013<br>par Joseph Kabila Kabange</div>
+<div><button class="gbtn" id="open">Ouvrir le livre</button><br><button class="glink" id="cd">J'ai déjà un code (nouveau téléphone)</button><br><button class="glink" id="adm">Espace administrateur</button></div></div></div>`);
+ $('#open').onclick=openBook;$('#adm').onclick=()=>adminLogin();$('#cd').onclick=recoverForm}
+function openBook(){const d=ld('data');if(me&&d){initApp(d);check(true)}else if(me){pending();check()}else form()}
+function form(){G(`<div class="book"><div class="panel"><h2>Inscription</h2><p class="mute">Renseignez votre identité. L'administrateur validera votre accès.</p>
+<label>Nom</label><input id="f1" type="text" autocomplete="family-name"><label>Post-nom</label><input id="f2" type="text"><label>Prénom</label><input id="f3" type="text" autocomplete="given-name">
+<label>Home</label><div class="homes">${['A','B','C','Libre'].map(h=>`<label><input type="radio" name="hm" value="${h}">${h}</label>`).join('')}</div>
+<div class="row"><button class="btn p" id="fs">Envoyer ma demande</button><button class="btn" id="fb">Retour</button></div><p id="fe" class="err"></p></div></div>`);
+ $('#fb').onclick=cover;
+ $('#fs').onclick=async()=>{const h=document.querySelector('[name=hm]:checked');const b={nom:$('#f1').value,postnom:$('#f2').value,prenom:$('#f3').value,home:h?h.value:''};
+  if(!b.nom.trim()||!b.postnom.trim()||!b.prenom.trim()||!b.home){$('#fe').textContent='Tous les champs sont obligatoires.';return}
+  $('#fs').disabled=true;try{const r=await post('register',b);if(!r.id)throw 0;me={id:r.id,token:r.token,prenom:b.prenom.trim()};sv('me',me);pending()}catch(e){$('#fe').textContent='Connexion impossible. Réessayez avec internet.';$('#fs').disabled=false}}}
+function pending(){G(`<div class="book"><div class="panel" style="text-align:center"><div style="font-size:42px">⏳</div><h2>Demande en attente</h2><p>Merci ${esc((me&&me.prenom)||'')}. L'administrateur doit valider votre accès. Dès que ce sera fait, l'application s'ouvrira et fonctionnera hors connexion.</p><p class="mute" id="pm"></p><div class="row" style="justify-content:center"><button class="btn p" id="pc">Vérifier maintenant</button><button class="btn" id="pb">Couverture</button></div></div></div>`);
+ $('#pc').onclick=()=>check();$('#pb').onclick=cover;poll=setInterval(()=>check(),15000)}
+function blocked(st){const t={rejected:['Demande refusée',"L'administrateur n'a pas validé votre demande."],revoked:['Accès retiré',"Votre accès a été retiré par l'administrateur."],moved:['Téléphone changé','Ce compte est maintenant utilisé sur un autre téléphone.'],unknown:['Compte introuvable','Votre inscription est introuvable. Veuillez vous inscrire à nouveau.']}[st]||['Accès impossible',''];
+ if(st==='unknown'){me=null;try{localStorage.removeItem('me')}catch(e){}}
+ G(`<div class="book"><div class="panel" style="text-align:center"><div style="font-size:42px">🔒</div><h2>${t[0]}</h2><p>${t[1]}</p><button class="btn p" id="pb">Retour</button></div></div>`);$('#pb').onclick=cover}
+async function check(silent){if(!me)return;
+ try{const r=await post('access',{id:me.id,token:me.token});
+  if(r.status==='approved'&&r.data){sv('data',r.data);sv('meta',{premium:r.premium,need:r.need,claimed:r.claimed,pay:r.pay,code:r.code,home:r.home,nom:r.nom});if(!silent)initApp(r.data);return}
+  try{localStorage.removeItem('data')}catch(e){}
+  if(silent){if(D)location.reload();return}
+  if(r.status==='pending')pm('Toujours en attente de validation.');else blocked(r.status)
+ }catch(e){if(!silent)pm('Pas de connexion internet.')}}
+/* administrateur */
+let af='pending';
+const adm=(action,id)=>post('admin',{action,id},{'x-admin-key':sessionStorage.getItem('ak')||''});
+function adminLogin(err){G(`<div class="book"><div class="panel"><h2>Administrateur</h2><label>Mot de passe</label><input id="ak" type="password" autocomplete="current-password"><div class="row"><button class="btn p" id="ao">Entrer</button><button class="btn" id="ab">Retour</button></div><p id="ae" class="err">${err||''}</p></div></div>`);
+ $('#ab').onclick=cover;$('#ao').onclick=()=>{sessionStorage.setItem('ak',$('#ak').value);adminList()}}
+async function adminList(){try{const r=await adm('list');if(r._s===401){sessionStorage.removeItem('ak');adminLogin('Mot de passe incorrect.');return}
+ const U=r.users||[],lab={pending:'En attente',approved:'Validé',rejected:'Refusé',revoked:'Retiré'};
+ const m=(f,s)=>f==='all'||(f==='off'?s==='rejected'||s==='revoked':s===f);const cnt=f=>U.filter(u=>m(f,u.status)).length;
+ G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Demandes d'accès</h2><button class="btn" id="aq">Quitter</button></div>
+<div class="row" style="margin:10px 0">${[['pending','En attente'],['approved','Validés'],['off','Refusés/retirés'],['all','Tous']].map(f=>`<button class="btn ${af===f[0]?'p':''}" data-f="${f[0]}">${f[1]} (${cnt(f[0])})</button>`).join('')}</div>
+${U.filter(u=>m(af,u.status)).map(u=>`<div class="u"><b>${esc(u.nom)} ${esc(u.postnom)} ${esc(u.prenom)}</b><span class="tag">Home ${esc(u.home)}</span><span class="tag st-${u.status}">${lab[u.status]||u.status}</span><div class="mute">${new Date(u.created).toLocaleString('fr-FR')}</div>${u.code?`<input class="codef" readonly value="${u.code}" onclick="this.select()">`:''}${u.premium?'<span class="tag st-approved">Premium</span>':''}${u.pay&&u.pay.status==='claimed'?`<div class="mute">💳 Paiement déclaré : ${esc(u.pay.ref)}</div>`:''}<div class="row" style="margin-top:8px">${u.status==='approved'?`<button class="btn" data-a="revoke" data-i="${u.id}">Retirer l'accès</button>`:`<button class="btn p" data-a="approve" data-i="${u.id}">Valider</button>`}${u.status==='pending'?`<button class="btn" data-a="reject" data-i="${u.id}">Refuser</button>`:''}${u.status==='approved'?`<button class="btn" data-a="newcode" data-i="${u.id}">Nouveau code</button>`:''}${u.pay&&u.pay.status==='claimed'?`<button class="btn p" data-a="confirmpay" data-i="${u.id}">Confirmer paiement</button>`:''}${u.premium?`<button class="btn" data-a="unpremium" data-i="${u.id}">Retirer Premium</button>`:''}<button class="btn" data-a="delete" data-i="${u.id}">Supprimer</button></div></div>`).join('')||'<p class="mute">Aucune demande.</p>'}</div></div>`);
+ $('#aq').onclick=()=>{sessionStorage.removeItem('ak');cover()};
+ $$('[data-f]').forEach(b=>b.onclick=()=>{af=b.dataset.f;adminList()});
+ $$('[data-a]').forEach(b=>b.onclick=async()=>{if(b.dataset.a==='delete'&&!confirm('Supprimer cette demande ?'))return;await adm(b.dataset.a,b.dataset.i);adminList()})
+ }catch(e){adminLogin('Connexion impossible (internet requis).')}}
+/* bibliothèque, assistant, profil, récupération */
+let docs=[],ALL=[],chat=[];
+function openDoc(id){const d=docs.find(x=>x.id===id);if(!d||d.soon)return;D=d;A=ALL.filter(a=>a.did===id);renderDoc();toc();show('lire');scrollTo(0,0)}
+function renderLib(){const main=docs.filter(d=>!d.parent);
+ $('#lib').innerHTML='<h2 class="h l2">Bibliothèque</h2><div class="grid">'+main.map(d=>{const kids=docs.filter(k=>k.parent===d.id),n=(d.items||[]).filter(x=>x.t==='a').length;
+  return `<div class="dc${d.soon?' soon':''}"${d.soon?'':` data-o="${d.id}"`}><div class="ic">${d.icon||'📘'}</div><b>${esc(d.title)}</b><span class="mute">${d.soon?'Bientôt disponible':n+' éléments'}</span>${kids.map(k=>`<button class="chip" data-o="${k.id}">📎 ${esc(k.title)}</button>`).join('')}</div>`}).join('')+'</div>';
+ $$('#lib [data-o]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();openDoc(e.dataset.o)})}
+const meta=()=>ld('meta')||{};
+const locked=()=>{const m=meta();return m.need&&!m.premium};
+function payCard(m){if(m.premium)return '<div class="card">✅ Premium actif</div>';const p=m.pay||{};
+ return `<div class="card"><b>Option Premium · assistant IA</b><p class="mute">${m.claimed?'Paiement déclaré : en attente de confirmation par l\'administrateur.':`Payez ${esc(p.price||'')} par Illicocash au ${esc(p.number||'…')}, puis saisissez la référence de la transaction.`}</p><input class="refin" type="text" placeholder="Référence du paiement"><button class="btn p paybtn">J'ai payé</button><p class="mute paymsg"></p></div>`}
+function bindPay(){$$('.paybtn').forEach(b=>b.onclick=async()=>{const c=b.closest('.card'),ref=c.querySelector('.refin').value.trim();if(ref.length<4){c.querySelector('.paymsg').textContent='Référence trop courte.';return}
+ try{const r=await post('pay',{id:me.id,token:me.token,ref});c.querySelector('.paymsg').textContent=r.ok?'Envoyé. En attente de confirmation.':'Erreur.'}catch(e){c.querySelector('.paymsg').textContent='Pas de connexion.'}})}
+function renderMe(){const m=meta();$('#v-me').innerHTML=`<div class="card"><h3 style="margin:0">${esc((me&&me.prenom)||'')} ${esc(m.nom||'')}</h3><p class="mute">Home ${esc(m.home||'')}</p></div><div class="card"><b>Votre code personnel</b><p class="mute">Il permet de retrouver votre accès sur un nouveau téléphone, sans nouvelle validation. Il ne fonctionne que sur un seul téléphone à la fois : l'ancien est désactivé. Ne le partagez pas.</p><input class="codef" readonly value="${esc(m.code||'—')}" onclick="this.select()"></div>${payCard(m)}`;bindPay()}
+function bubble(c,t){const e=document.createElement('div');e.className='m '+c;e.textContent=t;$('#chat').appendChild(e);e.scrollIntoView({block:'end'});return e}
+async function ask(q){show('ai');q=(q||'').trim();if(!q)return;bubble('mu',q);const w=bubble('ma','…');
+ try{const r=await post('assistant',{id:me.id,token:me.token,mode:'ask',q});if(r.error==='premium'){w.textContent='Cette fonction nécessite l\'option Premium.';return}
+  w.textContent=r.answer||'Une erreur est survenue.';if(r.refs&&r.refs.length){const s=document.createElement('div');s.className='mute';s.textContent='Extraits consultés : '+r.refs.slice(0,4).join(' · ');w.appendChild(s)}}
+ catch(e){w.textContent='Pas de connexion internet.'}}
+function aiInit(){const el=$('#v-ai');if(locked()){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Il répond uniquement à partir des documents de l\'application, sans rien inventer, et vous propose des sujets à étudier. Réservé aux membres Premium.</p></div>'+payCard(meta());bindPay();return}
+ if(!$('#chat')){el.innerHTML='<div class="card"><b>Assistant d\'étude</b><p class="mute">Posez une question : je réponds uniquement d\'après les documents de l\'application.</p><div id="sug2" class="row"></div></div><div id="chat"></div><div class="askbar"><input id="aqi" type="search" placeholder="Votre question…"><button class="btn p" id="asn">Envoyer</button></div>';
+  $('#asn').onclick=()=>{const v=$('#aqi').value;$('#aqi').value='';ask(v)};$('#aqi').onkeydown=e=>{if(e.key==='Enter')$('#asn').click()};showSug()}}
+let topics=null;
+function showSug(){const h=(topics||[]).map(t=>`<button class="chip" data-q="${esc(t)}">🎯 ${esc(t)}</button>`).join('');['#sug','#sug2'].forEach(s=>{const e=$(s);if(e){e.innerHTML=(s==='#sug'&&h?'<h2 class="h l3">Sujets d\'étude du jour</h2><div class="row">'+h+'</div>':h)}});$$('[data-q]').forEach(b=>b.onclick=()=>{aiInit();ask(b.dataset.q)})}
+async function sugLoad(){if(locked())return;try{const r=await post('assistant',{id:me.id,token:me.token,mode:'suggest'});if(r.topics){topics=r.topics;showSug()}}catch(e){}}
+function recoverForm(){G(`<div class="book"><div class="panel"><h2>Nouveau téléphone</h2><p class="mute">Entrez votre code personnel. Votre accès sera transféré ici et l'ancien téléphone sera désactivé.</p><input id="rc" type="text" placeholder="XXXX-XXXX-XXXX" autocapitalize="characters"><div class="row"><button class="btn p" id="rs">Récupérer mon accès</button><button class="btn" id="rb">Retour</button></div><p id="re" class="err"></p></div></div>`);
+ $('#rb').onclick=cover;$('#rs').onclick=async()=>{try{const r=await post('recover',{code:$('#rc').value});if(!r.id){$('#re').textContent=r.error==='status'?"Ce compte n'est plus actif.":'Code invalide.';return}
+  me={id:r.id,token:r.token,prenom:r.prenom};sv('me',me);try{localStorage.removeItem('data')}catch(e){}pending();check()}catch(e){$('#re').textContent='Connexion impossible.'}}}
+
+cover();if(me&&ld('data'))check(true);
+if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
+</script></body></html>
