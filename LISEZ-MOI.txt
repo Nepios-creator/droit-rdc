@@ -1,0 +1,21 @@
+BIBLIOTHÈQUE JURIDIQUE RDC : MISE EN LIGNE
+
+1) GitHub (recommandé) : créez un dépôt, déposez-y TOUT le contenu de ce dossier (garder les sous-dossiers),
+   puis sur Netlify : Add new site > Import an existing project > choisissez le dépôt.
+   (Alternative : npm i -g netlify-cli puis npm install puis netlify deploy --prod)
+
+2) Variables d'environnement (Netlify > Site configuration > Environment variables), puis redéployer :
+   MISTRAL_API_KEY    clé API Mistral (console.mistral.ai)          [obligatoire pour l'assistant]
+   ADMIN_KEY          facultatif : remplace le mot de passe administrateur intégré
+   PAY_NUMBER         numéro Illicocash qui reçoit les paiements
+   PAY_PRICE          prix affiché, ex. « 5 000 FC »
+   PREMIUM_REQUIRED   1 (défaut) : assistant réservé aux Premium ; 0 : assistant gratuit
+   ASSISTANT_MODEL    facultatif (défaut : mistral-small-latest ; ex. mistral-large-latest)
+
+3) Ajouter un document (Constitution, Code de la famille, DUDH, adages, lexique…) :
+   - Créez netlify/lib/constitution.mjs :
+       export default {id:'constitution',title:'Constitution de la RDC',icon:'🏛️',
+         items:[{t:'h',lvl:1,text:'TITRE I'},{t:'a',id:'a1',n:'Art. 1er',p:['Texte du premier paragraphe','Second paragraphe']}]};
+     (pour un lexique ou des adages : une entrée {t:'a'} par terme, n = le terme, p = sa définition)
+   - Dans netlify/lib/docs.mjs : importez-le et remplacez la ligne soon('constitution',…) par le nom importé.
+   Utilisez uniquement des textes officiels et exacts.
