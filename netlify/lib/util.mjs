@@ -1,0 +1,11 @@
+import { getStore } from '@netlify/blobs';
+import { createHash, timingSafeEqual, randomInt } from 'node:crypto';
+export const store = () => getStore({ name: 'users', consistency: 'strong' });
+export const codes = () => getStore({ name: 'codes', consistency: 'strong' });
+export const usage = () => getStore({ name: 'usage', consistency: 'strong' });
+export const sha = (s) => createHash('sha256').update(String(s)).digest('hex');
+export const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
+export const eq = (a, b) => { const x = Buffer.from(String(a)), y = Buffer.from(String(b)); return x.length === y.length && timingSafeEqual(x, y); };
+export const need = () => process.env.PREMIUM_REQUIRED !== '0';
+export const newCode = () => { const A = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s = ''; for (let i = 0; i < 12; i++) { s += A[randomInt(A.length)]; if (i % 4 === 3 && i < 11) s += '-'; } return s; };
+export const auth = async (b) => { if (!b || typeof b.id !== 'string' || typeof b.token !== 'string') return null; const u = await store().get(b.id, { type: 'json' }); return u && eq(u.th, sha(b.token)) ? u : null; };
