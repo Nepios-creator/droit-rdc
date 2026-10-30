@@ -2,9 +2,9 @@
 <html lang="fr"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Loi organique 13/011-B</title>
+<title>Drapp</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#1e3a5f">
+<meta name="theme-color" content="#4338ca">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
 :root{--bg:#f6f1e7;--card:#fffdf8;--ink:#1d2430;--mute:#6b7280;--pri:#1e3a5f;--acc:#c9a227;--line:#e3dccb;--y:#fde68a;--g:#bbf7d0;--b:#bfdbfe;--r:#fecaca;--fs:18px}
@@ -86,8 +86,44 @@ header{background:linear-gradient(135deg,#1e3a5f,#0f766e)}
 .m{max-width:88%;padding:10px 13px;border-radius:16px;margin:8px 0;white-space:pre-wrap;font-size:15px;line-height:1.5}
 .mu{background:var(--pri);color:#fff;margin-left:auto;border-bottom-right-radius:4px}.ma{background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
 .askbar{position:sticky;bottom:calc(66px + env(safe-area-inset-bottom));display:flex;gap:8px;background:var(--bg);padding:8px 0}.askbar input{flex:1;font-size:16px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+:root{--bg:#f3f5fb;--card:#fff;--ink:#0f172a;--mute:#64748b;--pri:#4338ca;--acc:#f59e0b;--line:#e2e8f0;--y:#fde68a;--g:#bbf7d0;--b:#bfdbfe;--r:#fecaca}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1020;--card:#141a2e;--ink:#e8ecf8;--mute:#94a3c0;--pri:#8b9cff;--acc:#fbbf24;--line:#252d47;--y:#6b5a1a;--g:#1d5a36;--b:#1f4a7a;--r:#7a2a2a}}
+body{background:var(--bg);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+header{background:linear-gradient(120deg,#4338ca,#0891b2);border-radius:0 0 24px 24px;box-shadow:0 10px 28px #4338ca44}
+header h1{font-size:20px;font-weight:800;letter-spacing:-.02em}
+header button{border-radius:12px;backdrop-filter:blur(6px)}
+.view.on{animation:fi .35s ease}@keyframes fi{from{opacity:0;transform:translateY(10px)}}
+.card,article{border-radius:20px;box-shadow:0 6px 20px #0f172a0d}
+.btn{border-radius:999px;padding:9px 16px;transition:transform .12s}.btn:active{transform:scale(.96)}
+.btn.p{background:linear-gradient(120deg,#4338ca,#0891b2);border:0;color:#fff}
+.daily{background:linear-gradient(135deg,#4338ca,#0891b2);color:#fff;border:0}.daily small{color:#fde68a}.daily .mute{color:#dbeafe}.daily .btn{background:#ffffff26;color:#fff;border:0}.daily .btn.p{background:#fff;color:#4338ca}
+.dc{border-radius:24px;position:relative;overflow:hidden;min-height:130px;animation:fi .5s both}
+.dc:nth-child(4n+1){background:linear-gradient(150deg,#e0e7ff,var(--card))}.dc:nth-child(4n+2){background:linear-gradient(150deg,#cffafe,var(--card))}.dc:nth-child(4n+3){background:linear-gradient(150deg,#fef3c7,var(--card))}.dc:nth-child(4n){background:linear-gradient(150deg,#fce7f3,var(--card))}
+@media(prefers-color-scheme:dark){.dc:nth-child(n){background:linear-gradient(150deg,#1d2547,var(--card))}}
+.dc .ic{font-size:34px;filter:drop-shadow(0 4px 6px #0003)}
+nav{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));border:1px solid var(--line);border-radius:26px;padding:5px 6px;background:color-mix(in srgb,var(--card) 80%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 34px #0f172a2e}
+nav button{border-radius:20px;padding:8px 0;transition:.2s}nav button.on{background:color-mix(in srgb,var(--pri) 15%,transparent);color:var(--pri)}
+#bar,.askbar{bottom:calc(88px + env(safe-area-inset-bottom))}
+.mu{background:linear-gradient(120deg,#4338ca,#0891b2)}
+#gate{background:#0b1020}
+.hero{min-height:100vh;min-height:100dvh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:24px}
+.bl{position:absolute;border-radius:50%;filter:blur(70px);opacity:.7;animation:dr 14s ease-in-out infinite alternate}
+.b1{width:340px;height:340px;background:#4f46e5;top:-90px;left:-90px}.b2{width:300px;height:300px;background:#06b6d4;bottom:-70px;right:-80px;animation-delay:-5s}.b3{width:220px;height:220px;background:#f59e0b;top:48%;left:58%;opacity:.4;animation-delay:-9s}
+@keyframes dr{to{transform:translate(40px,60px) scale(1.15)}}
+.fl{position:absolute;font-size:30px;opacity:.5;animation:fy 6s ease-in-out infinite}.f1{top:11%;left:13%}.f2{top:19%;right:12%;animation-delay:-2s}.f3{bottom:23%;left:9%;animation-delay:-4s}.f4{bottom:15%;right:15%;animation-delay:-1s}
+@keyframes fy{50%{transform:translateY(-16px) rotate(6deg)}}
+.hc{position:relative;text-align:center;color:#fff;width:min(100%,360px);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:#ffffff14;border:1px solid #ffffff2e;border-radius:34px;padding:40px 26px 32px;box-shadow:0 30px 80px #0007}
+.logo{width:78px;height:78px;margin:0 auto 16px;border-radius:26px;background:linear-gradient(135deg,#6366f1,#06b6d4);display:grid;place-items:center;font:800 44px system-ui;box-shadow:0 14px 34px #6366f188;animation:pl 3s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.07)}}
+.wm{font:800 54px/1 system-ui;letter-spacing:-.04em;margin:0;background:linear-gradient(90deg,#fff,#a5f3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tg{margin:12px 0 28px;font-size:17px;line-height:1.45;color:#dbe4ff}
+.go{width:100%;border:0;border-radius:18px;padding:16px;font:700 17px system-ui;color:#0b1020;background:linear-gradient(90deg,#fde68a,#fbbf24);box-shadow:0 10px 30px #fbbf2455}.go:active{transform:scale(.98)}
+.lk{margin-top:16px;font-size:12px;color:#9fb0e0}.lk button{background:none;border:0;color:inherit;text-decoration:underline;font-size:12px}
+.sig{position:absolute;bottom:14px;left:0;right:0;text-align:center;font:italic 11px system-ui;color:#ffffff4d;letter-spacing:.1em}
+.sig2{text-align:center;font:italic 11px system-ui;color:var(--mute);opacity:.5;margin:24px 0 0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style></head><body class="locked"><div id="gate"></div>
-<header><button id="menu" aria-label="Sommaire">☰</button><h1>Loi organique 13/011-B</h1><button id="fm">A−</button><button id="fp">A+</button></header>
+<header><button id="menu" aria-label="Sommaire">☰</button><h1>Drapp</h1><button id="fm">A−</button><button id="fp">A+</button></header>
 <main>
 <section id="v-lib" class="view on"><div id="daily"></div><div id="sug"></div><div id="lib"></div></section><section id="v-lire" class="view"><div id="doc"></div></section><section id="v-ai" class="view"></section><section id="v-me" class="view"></section>
 <section id="v-search" class="view"><input id="q" type="search" placeholder="Rechercher un mot, une expression…" autocomplete="off"><div id="results" class="mute" style="margin-top:10px">Tapez au moins 2 lettres.</div></section>
@@ -102,6 +138,7 @@ header{background:linear-gradient(135deg,#1e3a5f,#0f766e)}
 <div id="drawer"><aside id="toc"></aside></div>
 <dialog id="dlg"><div id="dq" class="mute"></div><textarea id="dt" placeholder="Votre commentaire…"></textarea>
 <div class="row" style="margin-top:10px"><button class="btn p" id="ds">Enregistrer</button><button class="btn" id="dd">Supprimer le surlignage</button><button class="btn" id="dc">Fermer</button></div></dialog>
+<script src="config.js"></script>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
@@ -112,7 +149,7 @@ const save=()=>{try{localStorage.setItem(K,JSON.stringify(ann))}catch(e){}};
 let fs=+(localStorage.getItem('fs')||18);const setfs=()=>document.documentElement.style.setProperty('--fs',fs+'px');setfs();
 $('#fm').onclick=()=>{fs=Math.max(14,fs-1);localStorage.setItem('fs',fs);setfs()};
 $('#fp').onclick=()=>{fs=Math.min(28,fs+1);localStorage.setItem('fs',fs);setfs()};
-function show(v){$$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));if(v==='notes')renderNotes();if(v==='me')renderMe();if(v==='ai')aiInit();if(v==='lib')renderLib();hideBar()}
+function show(v){curV=v;setTimeout(saveState,0);$$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));if(v==='notes')renderNotes();if(v==='me')renderMe();if(v==='ai')aiInit();if(v==='lib')renderLib();hideBar()}
 $$('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
 function go(id){if(id.includes(':')&&(!D||D.id!==id.split(':')[0]))openDoc(id.split(':')[0]);show('lire');$('#drawer').classList.remove('on');const el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)}}
 function paraHTML(a,pi){const t=a.p[pi];const segs=[];ann.forEach(n=>n.segs.forEach(s=>{if(s.a===a.gid&&s.p===pi)segs.push({s:s.s,e:s.e,n})}));
@@ -159,21 +196,31 @@ function renderNotes(){const N=$('#notes');if(!ann.length){N.innerHTML='<p class
 $('#exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(ann,null,1)],{type:'application/json'}));a.download='annotations-loi.json';a.click()};
 $('#imp').onchange=async e=>{try{const j=JSON.parse(await e.target.files[0].text());if(Array.isArray(j)){const ids=new Set(ann.map(x=>x.id));j.forEach(x=>{if(x&&x.id&&x.segs&&!ids.has(x.id))ann.push(x)});save();renderDoc();renderNotes()}}catch(_){alert('Fichier invalide')}};
 /* accès */
+const CFG=window.DRAPP||{},STATIC=CFG.mode!=='server';
+let curV='lib';
+function saveState(){if(document.body.classList.contains('locked'))return;sv('st',{v:curV,doc:D&&D.id,y:scrollY,t:Date.now()})}
+addEventListener('scroll',()=>{clearTimeout(window._sv);window._sv=setTimeout(saveState,400)},{passive:true});
+document.addEventListener('visibilitychange',saveState);
+function restore(){const st=ld('st');if(!st)return;if(st.v==='lire'&&st.doc)openDoc(st.doc);else if(st.v&&st.v!=='lire')show(st.v);setTimeout(()=>scrollTo(0,st.y||0),80)}
+async function loadStatic(){try{const r=await fetch('docs.json');const d=await r.json();sv('data',d);return d}catch(e){return ld('data')}}
+const payInfo=()=>STATIC?{number:CFG.payNumber,price:CFG.payPrice}:(meta().pay||{});
+function enter(d){const p=payInfo();if(p.number&&!meta().premium)offer(()=>initApp(d));else initApp(d)}
+function offer(next){const p=payInfo();G(`<div class="book"><div class="panel" style="text-align:center"><div style="font-size:40px">✨</div><h2>Option Premium</h2><p class="mute">Soutenez Drapp et débloquez les fonctions avancées.</p><div class="card" style="text-align:left"><b>Comment payer (Illicocash)</b><ol class="mute" style="padding-left:18px;margin:8px 0"><li>Envoyez <b>${esc(p.price||'le montant indiqué')}</b> au <b>${esc(p.number)}</b></li><li>Gardez la référence de la transaction</li><li>${STATIC?"Envoyez-la à l'administrateur pour activer votre accès":'Saisissez-la ci-dessous'}</li></ol>${STATIC?'':'<input class="refin" type="text" placeholder="Référence du paiement"><button class="btn p paybtn">J\'ai payé</button><p class="mute paymsg"></p>'}</div><button class="btn p" id="ol" style="width:100%;margin-top:10px">Continuer</button></div></div>`);bindPay();$('#ol').onclick=next}
+function cover(){G(`<div class="hero"><i class="bl b1"></i><i class="bl b2"></i><i class="bl b3"></i><span class="fl f1">⚖️</span><span class="fl f2">📜</span><span class="fl f3">🏛️</span><span class="fl f4">📚</span>
+<div class="hc"><div class="logo">D</div><h1 class="wm">Drapp</h1><p class="tg">Le droit congolais,<br>à portée de main.</p><button class="go" id="open">Entrer</button>${STATIC?'':'<div class="lk"><button id="cd">J\'ai un code</button> · <button id="adm">Administrateur</button></div>'}</div><div class="sig">By Mr. Mayele</div></div>`);
+ $('#open').onclick=openBook;if(!STATIC){$('#adm').onclick=()=>adminLogin();$('#cd').onclick=recoverForm}}
+async function openBook(){if(STATIC){const d=ld('data')||await loadStatic();if(!d)return;me?enter(d):form();return}
+ const d=ld('data');if(me&&d){enter(d);check(true)}else if(me){pending();check()}else form()}
+function payCard(m){if(m.premium)return '<div class="card">✅ Premium actif</div>';const p=m.pay||{};if(!p.number)return '';
+ return `<div class="card"><b>Option Premium</b><p class="mute">${m.claimed?'Paiement déclaré : en attente de confirmation.':`Payez ${esc(p.price||'')} par Illicocash au ${esc(p.number)}.`}</p>${STATIC?'':'<input class="refin" type="text" placeholder="Référence du paiement"><button class="btn p paybtn">J\'ai payé</button><p class="mute paymsg"></p>'}</div>`}
+
 const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
 const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-const post=(p,b,h)=>fetch('/api/'+p,{method:'POST',headers:Object.assign({'content-type':'application/json'},h||{}),body:JSON.stringify(b)}).then(r=>r.json().then(j=>Object.assign(j,{_s:r.status})));
+const post=(p,b,h)=>fetch((CFG.api||'/api/')+p,{method:'POST',headers:Object.assign({'content-type':'application/json'},h||{}),body:JSON.stringify(b)}).then(r=>r.json().then(j=>Object.assign(j,{_s:r.status})));
 let me=ld('me'),poll=null;
 const G=h=>{clearInterval(poll);$('#gate').innerHTML=h;$('#gate').scrollTop=0};
 const pm=t=>{const e=$('#pm');if(e)e.textContent=t};
 function initApp(d){docs=d.docs;ALL=[];docs.forEach(doc=>{let k=0;(doc.items||[]).forEach(x=>{if(x.t==='h')x.i=k++;else{x.gid=doc.id+':'+x.id;x.did=doc.id;x.dt=doc.title;x.annex=!!doc.parent;ALL.push(x)}})});document.body.classList.remove('locked');daily();renderLib();show('lib');sugLoad()}
-function cover(){G(`<div class="book"><div class="cover">
-<div class="rdc">RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</div><div class="orn">✦</div>
-<div class="big">LOI<br>ORGANIQUE</div><div class="num">n° 13/011-B du 11 avril 2013</div><div class="orn">❖</div>
-<div class="sub">portant organisation, fonctionnement et compétences des juridictions de l'ordre judiciaire</div>
-<div class="refs"><b>RÉFÉRENCES</b>Constitution du 18 février 2006 · Art. 149, 153 et 156<br>Titre I : Organisation et fonctionnement<br>Titre II : Compétence judiciaire<br>Titre III : Dispositions transitoires et finales<br><br>Promulguée à Kinshasa, le 11 avril 2013<br>par Joseph Kabila Kabange</div>
-<div><button class="gbtn" id="open">Ouvrir le livre</button><br><button class="glink" id="cd">J'ai déjà un code (nouveau téléphone)</button><br><button class="glink" id="adm">Espace administrateur</button></div></div></div>`);
- $('#open').onclick=openBook;$('#adm').onclick=()=>adminLogin();$('#cd').onclick=recoverForm}
-function openBook(){const d=ld('data');if(me&&d){initApp(d);check(true)}else if(me){pending();check()}else form()}
 function form(){G(`<div class="book"><div class="panel"><h2>Inscription</h2><p class="mute">Renseignez votre identité. L'administrateur validera votre accès.</p>
 <label>Nom</label><input id="f1" type="text" autocomplete="family-name"><label>Post-nom</label><input id="f2" type="text"><label>Prénom</label><input id="f3" type="text" autocomplete="given-name">
 <label>Home</label><div class="homes">${['A','B','C','Libre'].map(h=>`<label><input type="radio" name="hm" value="${h}">${h}</label>`).join('')}</div>
@@ -181,7 +228,7 @@ function form(){G(`<div class="book"><div class="panel"><h2>Inscription</h2><p c
  $('#fb').onclick=cover;
  $('#fs').onclick=async()=>{const h=document.querySelector('[name=hm]:checked');const b={nom:$('#f1').value,postnom:$('#f2').value,prenom:$('#f3').value,home:h?h.value:''};
   if(!b.nom.trim()||!b.postnom.trim()||!b.prenom.trim()||!b.home){$('#fe').textContent='Tous les champs sont obligatoires.';return}
-  $('#fs').disabled=true;try{const r=await post('register',b);if(!r.id)throw 0;me={id:r.id,token:r.token,prenom:b.prenom.trim()};sv('me',me);pending()}catch(e){$('#fe').textContent='Connexion impossible. Réessayez avec internet.';$('#fs').disabled=false}}}
+  $('#fs').disabled=true;try{if(STATIC){me={id:'local',token:'',prenom:b.prenom.trim(),nom:b.nom.trim(),home:b.home};sv('me',me);const d=await loadStatic();if(!d)throw 0;enter(d);return}const r=await post('register',b);if(!r.id)throw 0;me={id:r.id,token:r.token,prenom:b.prenom.trim()};sv('me',me);pending()}catch(e){$('#fe').textContent='Connexion impossible. Réessayez avec internet.';$('#fs').disabled=false}}}
 function pending(){G(`<div class="book"><div class="panel" style="text-align:center"><div style="font-size:42px">⏳</div><h2>Demande en attente</h2><p>Merci ${esc((me&&me.prenom)||'')}. L'administrateur doit valider votre accès. Dès que ce sera fait, l'application s'ouvrira et fonctionnera hors connexion.</p><p class="mute" id="pm"></p><div class="row" style="justify-content:center"><button class="btn p" id="pc">Vérifier maintenant</button><button class="btn" id="pb">Couverture</button></div></div></div>`);
  $('#pc').onclick=()=>check();$('#pb').onclick=cover;poll=setInterval(()=>check(),15000)}
 function blocked(st){const t={rejected:['Demande refusée',"L'administrateur n'a pas validé votre demande."],revoked:['Accès retiré',"Votre accès a été retiré par l'administrateur."],moved:['Téléphone changé','Ce compte est maintenant utilisé sur un autre téléphone.'],unknown:['Compte introuvable','Votre inscription est introuvable. Veuillez vous inscrire à nouveau.']}[st]||['Accès impossible',''];
@@ -189,7 +236,7 @@ function blocked(st){const t={rejected:['Demande refusée',"L'administrateur n'a
  G(`<div class="book"><div class="panel" style="text-align:center"><div style="font-size:42px">🔒</div><h2>${t[0]}</h2><p>${t[1]}</p><button class="btn p" id="pb">Retour</button></div></div>`);$('#pb').onclick=cover}
 async function check(silent){if(!me)return;
  try{const r=await post('access',{id:me.id,token:me.token});
-  if(r.status==='approved'&&r.data){sv('data',r.data);sv('meta',{premium:r.premium,need:r.need,claimed:r.claimed,pay:r.pay,code:r.code,home:r.home,nom:r.nom});if(!silent)initApp(r.data);return}
+  if(r.status==='approved'&&r.data){sv('data',r.data);sv('meta',{premium:r.premium,need:r.need,claimed:r.claimed,pay:r.pay,code:r.code,home:r.home,nom:r.nom});if(!silent)enter(r.data);return}
   try{localStorage.removeItem('data')}catch(e){}
   if(silent){if(D)location.reload();return}
   if(r.status==='pending')pm('Toujours en attente de validation.');else blocked(r.status)
@@ -216,28 +263,26 @@ function renderLib(){const main=docs.filter(d=>!d.parent);
  $('#lib').innerHTML='<h2 class="h l2">Bibliothèque</h2><div class="grid">'+main.map(d=>{const kids=docs.filter(k=>k.parent===d.id),n=(d.items||[]).filter(x=>x.t==='a').length;
   return `<div class="dc${d.soon?' soon':''}"${d.soon?'':` data-o="${d.id}"`}><div class="ic">${d.icon||'📘'}</div><b>${esc(d.title)}</b><span class="mute">${d.soon?'Bientôt disponible':n+' éléments'}</span>${kids.map(k=>`<button class="chip" data-o="${k.id}">📎 ${esc(k.title)}</button>`).join('')}</div>`}).join('')+'</div>';
  $$('#lib [data-o]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();openDoc(e.dataset.o)})}
-const meta=()=>ld('meta')||{};
+const meta=()=>STATIC?{premium:false,need:false,pay:{number:CFG.payNumber,price:CFG.payPrice},home:(me||{}).home,nom:(me||{}).nom}:(ld('meta')||{});
 const locked=()=>{const m=meta();return m.need&&!m.premium};
-function payCard(m){if(m.premium)return '<div class="card">✅ Premium actif</div>';const p=m.pay||{};
- return `<div class="card"><b>Option Premium · assistant IA</b><p class="mute">${m.claimed?'Paiement déclaré : en attente de confirmation par l\'administrateur.':`Payez ${esc(p.price||'')} par Illicocash au ${esc(p.number||'…')}, puis saisissez la référence de la transaction.`}</p><input class="refin" type="text" placeholder="Référence du paiement"><button class="btn p paybtn">J'ai payé</button><p class="mute paymsg"></p></div>`}
 function bindPay(){$$('.paybtn').forEach(b=>b.onclick=async()=>{const c=b.closest('.card'),ref=c.querySelector('.refin').value.trim();if(ref.length<4){c.querySelector('.paymsg').textContent='Référence trop courte.';return}
  try{const r=await post('pay',{id:me.id,token:me.token,ref});c.querySelector('.paymsg').textContent=r.ok?'Envoyé. En attente de confirmation.':'Erreur.'}catch(e){c.querySelector('.paymsg').textContent='Pas de connexion.'}})}
-function renderMe(){const m=meta();$('#v-me').innerHTML=`<div class="card"><h3 style="margin:0">${esc((me&&me.prenom)||'')} ${esc(m.nom||'')}</h3><p class="mute">Home ${esc(m.home||'')}</p></div><div class="card"><b>Votre code personnel</b><p class="mute">Il permet de retrouver votre accès sur un nouveau téléphone, sans nouvelle validation. Il ne fonctionne que sur un seul téléphone à la fois : l'ancien est désactivé. Ne le partagez pas.</p><input class="codef" readonly value="${esc(m.code||'—')}" onclick="this.select()"></div>${payCard(m)}`;bindPay()}
+function renderMe(){const m=meta();$('#v-me').innerHTML=`<div class="card"><h3 style="margin:0">${esc((me&&me.prenom)||'')} ${esc(m.nom||'')}</h3><p class="mute">Home ${esc(m.home||'')}</p></div>${STATIC?'<div class="card mute">Vos informations sont enregistrées sur cet appareil.</div>':`<div class="card"><b>Votre code personnel</b><p class="mute">Il permet de retrouver votre accès sur un nouveau téléphone, sans nouvelle validation. Un seul téléphone à la fois. Ne le partagez pas.</p><input class="codef" readonly value="${esc(m.code||'—')}" onclick="this.select()"></div>`}${payCard(m)}<p class="sig2">By Mr. Mayele</p>`;bindPay()}
 function bubble(c,t){const e=document.createElement('div');e.className='m '+c;e.textContent=t;$('#chat').appendChild(e);e.scrollIntoView({block:'end'});return e}
 async function ask(q){show('ai');q=(q||'').trim();if(!q)return;bubble('mu',q);const w=bubble('ma','…');
  try{const r=await post('assistant',{id:me.id,token:me.token,mode:'ask',q});if(r.error==='premium'){w.textContent='Cette fonction nécessite l\'option Premium.';return}
   w.textContent=r.answer||'Une erreur est survenue.';if(r.refs&&r.refs.length){const s=document.createElement('div');s.className='mute';s.textContent='Extraits consultés : '+r.refs.slice(0,4).join(' · ');w.appendChild(s)}}
  catch(e){w.textContent='Pas de connexion internet.'}}
-function aiInit(){const el=$('#v-ai');if(locked()){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Il répond uniquement à partir des documents de l\'application, sans rien inventer, et vous propose des sujets à étudier. Réservé aux membres Premium.</p></div>'+payCard(meta());bindPay();return}
+function aiInit(){const el=$('#v-ai');if(STATIC){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Bientôt disponible. Il répondra uniquement d\'après les documents de Drapp.</p></div>';return}if(locked()){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Il répond uniquement à partir des documents de l\'application, sans rien inventer, et vous propose des sujets à étudier. Réservé aux membres Premium.</p></div>'+payCard(meta());bindPay();return}
  if(!$('#chat')){el.innerHTML='<div class="card"><b>Assistant d\'étude</b><p class="mute">Posez une question : je réponds uniquement d\'après les documents de l\'application.</p><div id="sug2" class="row"></div></div><div id="chat"></div><div class="askbar"><input id="aqi" type="search" placeholder="Votre question…"><button class="btn p" id="asn">Envoyer</button></div>';
   $('#asn').onclick=()=>{const v=$('#aqi').value;$('#aqi').value='';ask(v)};$('#aqi').onkeydown=e=>{if(e.key==='Enter')$('#asn').click()};showSug()}}
 let topics=null;
 function showSug(){const h=(topics||[]).map(t=>`<button class="chip" data-q="${esc(t)}">🎯 ${esc(t)}</button>`).join('');['#sug','#sug2'].forEach(s=>{const e=$(s);if(e){e.innerHTML=(s==='#sug'&&h?'<h2 class="h l3">Sujets d\'étude du jour</h2><div class="row">'+h+'</div>':h)}});$$('[data-q]').forEach(b=>b.onclick=()=>{aiInit();ask(b.dataset.q)})}
-async function sugLoad(){if(locked())return;try{const r=await post('assistant',{id:me.id,token:me.token,mode:'suggest'});if(r.topics){topics=r.topics;showSug()}}catch(e){}}
+async function sugLoad(){if(STATIC||locked())return;try{const r=await post('assistant',{id:me.id,token:me.token,mode:'suggest'});if(r.topics){topics=r.topics;showSug()}}catch(e){}}
 function recoverForm(){G(`<div class="book"><div class="panel"><h2>Nouveau téléphone</h2><p class="mute">Entrez votre code personnel. Votre accès sera transféré ici et l'ancien téléphone sera désactivé.</p><input id="rc" type="text" placeholder="XXXX-XXXX-XXXX" autocapitalize="characters"><div class="row"><button class="btn p" id="rs">Récupérer mon accès</button><button class="btn" id="rb">Retour</button></div><p id="re" class="err"></p></div></div>`);
  $('#rb').onclick=cover;$('#rs').onclick=async()=>{try{const r=await post('recover',{code:$('#rc').value});if(!r.id){$('#re').textContent=r.error==='status'?"Ce compte n'est plus actif.":'Code invalide.';return}
   me={id:r.id,token:r.token,prenom:r.prenom};sv('me',me);try{localStorage.removeItem('data')}catch(e){}pending();check()}catch(e){$('#re').textContent='Connexion impossible.'}}}
 
-cover();if(me&&ld('data'))check(true);
+(function(){const st=ld('st'),d=ld('data');if(me&&d&&st&&Date.now()-st.t<432e5){initApp(d);restore();if(!STATIC)check(true)}else{cover();if(!STATIC&&me&&d)check(true)}})();
 if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
 </script></body></html>
