@@ -1,7 +1,7 @@
 // Réglages de Drapp. mode: 'static' (GitHub Pages seul) ou 'server' (avec le serveur Netlify).
 window.DRAPP = {
-  mode: 'static',
-  api: '/api/',
+  mode: 'server',
+  api: 'https://aehxiexsotqpmnmsfwgq.supabase.co/functions/v1/drapp',
   payNumber: '',   // numéro Illicocash qui reçoit les paiements (laisser vide pour ne pas afficher l'offre)
   payPrice: ''     // ex. '5 000 FC'
 };
