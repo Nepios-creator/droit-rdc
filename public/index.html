@@ -220,7 +220,8 @@ const post=(p,b,h)=>fetch(CFG.api,{method:'POST',headers:Object.assign({'content
 let me=ld('me'),poll=null;
 const G=h=>{clearInterval(poll);$('#gate').innerHTML=h;$('#gate').scrollTop=0};
 const pm=t=>{const e=$('#pm');if(e)e.textContent=t};
-function initApp(d){docs=d.docs;ALL=[];docs.forEach(doc=>{let k=0;(doc.items||[]).forEach(x=>{if(x.t==='h')x.i=k++;else{x.gid=doc.id+':'+x.id;x.did=doc.id;x.dt=doc.title;x.annex=!!doc.parent;ALL.push(x)}})});document.body.classList.remove('locked');daily();renderLib();show('lib');sugLoad()}
+function buildDocs(d){docs=d.docs;ALL=[];docs.forEach(doc=>{let k=0;(doc.items||[]).forEach(x=>{if(x.t==='h')x.i=k++;else{x.gid=doc.id+':'+x.id;x.did=doc.id;x.dt=doc.title;x.annex=!!doc.parent;ALL.push(x)}})})}
+function initApp(d){buildDocs(d);document.body.classList.remove('locked');daily();renderLib();show('lib');sugLoad()}
 function form(){G(`<div class="book"><div class="panel"><h2>Inscription</h2><p class="mute">Renseignez votre identité. L'administrateur validera votre accès.</p>
 <label>Nom</label><input id="f1" type="text" autocomplete="family-name"><label>Post-nom</label><input id="f2" type="text"><label>Prénom</label><input id="f3" type="text" autocomplete="given-name">
 <label>Home</label><div class="homes">${['A','B','C','Libre'].map(h=>`<label><input type="radio" name="hm" value="${h}">${h}</label>`).join('')}</div>
@@ -237,8 +238,8 @@ function blocked(st){const t={rejected:['Demande refusée',"L'administrateur n'a
  if(st==='unknown'){me=null;try{localStorage.removeItem('me')}catch(e){}}
  G(`<div class="book"><div class="panel" style="text-align:center"><div style="font-size:42px">🔒</div><h2>${t[0]}</h2><p>${t[1]}</p><button class="btn p" id="pb">Retour</button></div></div>`);$('#pb').onclick=cover}
 async function check(silent){if(!me)return;
- try{const r=await post('access',{id:me.id,token:me.token});
-  if(r.status==='approved'&&r.data){sv('data',r.data);sv('meta',{premium:r.premium,need:r.need,claimed:r.claimed,pay:r.pay,code:r.code,home:r.home,nom:r.nom});if(!silent)enter(r.data);return}
+ try{const r=await post('access',{id:me.id,token:me.token,v:ld('data')?ld('ver'):null});if(r.same&&!ld('data')){sv('ver',null);return check(silent)}
+  if(r.status==='approved'&&(r.data||(r.same&&ld('data')))){const dd=r.data||ld('data');if(r.data){sv('data',r.data);sv('ver',r.ver);if(silent&&docs.length&&!document.body.classList.contains('locked')){buildDocs(r.data);renderLib();daily()}}sv('meta',{premium:r.premium,need:r.need,claimed:r.claimed,pay:r.pay,code:r.code,home:r.home,nom:r.nom});if(!silent)enter(dd);return}
   try{localStorage.removeItem('data')}catch(e){}
   if(r.status==='pending'||r.status==='unpaid'){const np={st:r.status,need:r.need,claimed:r.claimed,pay:r.pay},ch=JSON.stringify(np)!==JSON.stringify(ld('pend'));sv('pend',np);if(silent){if(D)location.reload();return}if(ch)pending();else pm('Toujours en attente.');return}
   if(silent){if(D)location.reload();return}
@@ -252,19 +253,22 @@ function adminLogin(err){G(`<div class="book"><div class="panel"><h2>Administrat
 async function adminList(){try{const r=await adm('list');if(r._s===401){sessionStorage.removeItem('ak');adminLogin('Mot de passe incorrect.');return}
  const U=r.users||[],lab={pending:'En attente',approved:'Validé',rejected:'Refusé',revoked:'Retiré'};
  const m=(f,s)=>f==='all'||(f==='off'?s==='rejected'||s==='revoked':s===f);const cnt=f=>U.filter(u=>m(f,u.status)).length;
- G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Demandes d'accès</h2><button class="btn" id="aq">Quitter</button></div>
+ G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Demandes d'accès</h2><span><button class="btn" id="ad">📚 Documents</button> <button class="btn" id="aq">Quitter</button></span></div>
 <div class="row" style="margin:10px 0">${[['pending','En attente'],['approved','Validés'],['off','Refusés/retirés'],['all','Tous']].map(f=>`<button class="btn ${af===f[0]?'p':''}" data-f="${f[0]}">${f[1]} (${cnt(f[0])})</button>`).join('')}</div>
 ${U.filter(u=>m(af,u.status)).map(u=>`<div class="u"><b>${esc(u.nom)} ${esc(u.postnom)} ${esc(u.prenom)}</b><span class="tag">Home ${esc(u.home)}</span><span class="tag st-${u.status}">${lab[u.status]||u.status}</span><div class="mute">${new Date(u.created).toLocaleString('fr-FR')}</div>${u.code?`<input class="codef" readonly value="${u.code}" onclick="this.select()">`:''}${u.premium?'<span class="tag st-approved">Premium</span>':''}${u.pay&&u.pay.status==='claimed'?`<div class="mute">💳 Paiement déclaré : ${esc(u.pay.ref)}</div>`:''}<div class="row" style="margin-top:8px">${u.status==='approved'?`<button class="btn" data-a="revoke" data-i="${u.id}">Retirer l'accès</button>`:`<button class="btn p" data-a="approve" data-i="${u.id}">${u.pay&&u.pay.status==='claimed'?'Valider accès + paiement':'Valider l\'accès'}</button>`}${u.status==='pending'?`<button class="btn" data-a="reject" data-i="${u.id}">Refuser</button>`:''}${u.status==='approved'?`<button class="btn" data-a="newcode" data-i="${u.id}">Nouveau code</button>`:''}${u.pay&&u.pay.status==='claimed'?`<button class="btn p" data-a="confirmpay" data-i="${u.id}">Confirmer paiement</button>`:''}${u.premium?`<button class="btn" data-a="unpremium" data-i="${u.id}">Retirer Premium</button>`:(u.status==='approved'?`<button class="btn" data-a="premium" data-i="${u.id}">Donner Premium</button>`:'')}<button class="btn" data-a="delete" data-i="${u.id}">Supprimer</button></div></div>`).join('')||'<p class="mute">Aucune demande.</p>'}</div></div>`);
- $('#aq').onclick=()=>{sessionStorage.removeItem('ak');cover()};
+ $('#aq').onclick=()=>{sessionStorage.removeItem('ak');cover()};$('#ad').onclick=()=>adminDocs();
  $$('[data-f]').forEach(b=>b.onclick=()=>{af=b.dataset.f;adminList()});
  $$('[data-a]').forEach(b=>b.onclick=async()=>{if(b.dataset.a==='delete'&&!confirm('Supprimer cette demande ?'))return;await adm(b.dataset.a,b.dataset.i);if(b.dataset.a==='approve')af='approved';adminList()})
  }catch(e){adminLogin('Connexion impossible (internet requis).')}}
 /* bibliothèque, assistant, profil, récupération */
 let docs=[],ALL=[],chat=[];
 function openDoc(id){const d=docs.find(x=>x.id===id);if(!d||d.soon)return;D=d;A=ALL.filter(a=>a.did===id);renderDoc();toc();show('lire');scrollTo(0,0)}
-function renderLib(){const main=docs.filter(d=>!d.parent);
- $('#lib').innerHTML='<h2 class="h l2">Bibliothèque</h2><div class="grid">'+main.map(d=>{const kids=docs.filter(k=>k.parent===d.id),n=(d.items||[]).filter(x=>x.t==='a').length;
-  return `<div class="dc${d.soon?' soon':''}"${d.soon?'':` data-o="${d.id}"`}><div class="ic">${d.icon||'📘'}</div><b>${esc(d.title)}</b><span class="mute">${d.soon?'Bientôt disponible':n+' éléments'}</span>${kids.map(k=>`<button class="chip" data-o="${k.id}">📎 ${esc(k.title)}</button>`).join('')}</div>`}).join('')+'</div>';
+const SECS=['Droit congolais','Droit international','Les manuels de droit','Ressources juridiques'];
+function renderLib(){const main=docs.filter(d=>!d.parent);const secs=SECS.concat([...new Set(main.map(d=>d.section).filter(x=>x&&!SECS.includes(x)))]);
+ const card=d=>{const kids=docs.filter(k=>k.parent===d.id),n=(d.items||[]).filter(x=>x.t==='a').length;
+  return `<div class="dc${d.soon?' soon':''}"${d.soon?'':` data-o="${d.id}"`}><div class="ic">${d.icon||'📘'}</div><b>${esc(d.title)}</b><span class="mute">${d.soon?'Bientôt disponible':n+' éléments'}</span>${kids.map(k=>`<button class="chip" data-o="${k.id}">📎 ${esc(k.title)}</button>`).join('')}</div>`};
+ $('#lib').innerHTML=secs.map(sec=>{const ds=main.filter(d=>(d.section||'Les manuels de droit')===sec);const man=sec==='Les manuels de droit';if(!ds.length&&!man)return '';
+  return `<h2 class="h l2">${man?'📖 ':''}${esc(sec)}</h2>`+(ds.length?`<div class="grid">${ds.map(card).join('')}</div>`:'<p class="mute">Les manuels ajoutés par l\'administrateur apparaîtront ici.</p>')}).join('');
  $$('#lib [data-o]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();openDoc(e.dataset.o)})}
 const meta=()=>STATIC?{premium:false,need:false,pay:{number:CFG.payNumber,price:CFG.payPrice},home:(me||{}).home,nom:(me||{}).nom}:(ld('meta')||{});
 const locked=()=>{const m=meta();return m.need&&!m.premium};
@@ -286,8 +290,20 @@ function recoverForm(){G(`<div class="book"><div class="panel"><h2>Nouveau tél�
  $('#rb').onclick=cover;$('#rs').onclick=async()=>{try{const r=await post('recover',{code:$('#rc').value});if(!r.id){$('#re').textContent=r.error==='status'?"Ce compte n'est plus actif.":'Code invalide.';return}
   me={id:r.id,token:r.token,prenom:r.prenom};sv('me',me);try{localStorage.removeItem('data')}catch(e){}pending();check()}catch(e){$('#re').textContent='Connexion impossible.'}}}
 
+async function adminDocs(msg){let L=[];try{const r=await adm('listdocs');L=r.docs||[]}catch(e){}
+ G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Documents ajoutés</h2><button class="btn" id="dq">Retour</button></div>
+<p class="mute">Collez un texte (ou choisissez un fichier .txt) : il est organisé automatiquement en titres, articles et sections, puis publié dans la bibliothèque.</p>
+<label>Titre</label><input id="dt1" type="text" placeholder="Ex. Manuel de droit civil"><label>Espace</label><select id="ds1" class="refin">${SECS.map(x=>`<option>${x}</option>`).join('')}</select>
+<label>Icône</label><input id="di1" type="text" value="📖" maxlength="4"><label>Texte du document</label><textarea id="dx1" rows="7" placeholder="Collez le texte ici…" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px"></textarea>
+<input id="df1" type="file" accept=".txt,.md,text/plain" style="margin:8px 0"><button class="btn p" id="da">Ajouter à la bibliothèque</button><p id="dm" class="${msg&&msg.err?'err':'mute'}">${esc((msg&&msg.t)||'')}</p><hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+${L.map(d=>`<div class="u"><b>${esc(d.icon)} ${esc(d.title)}</b><span class="tag">${esc(d.section)}</span><div class="mute">${d.n} éléments</div><button class="btn" data-del="${d.id}" style="margin-top:6px">Supprimer</button></div>`).join('')||'<p class="mute">Aucun document ajouté pour l\'instant.</p>'}</div></div>`);
+ $('#dq').onclick=()=>adminList();
+ $('#df1').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('#dx1').value=r.result;if(!$('#dt1').value)$('#dt1').value=f.name.replace(/\.[^.]+$/,'')};r.readAsText(f)};
+ $('#da').onclick=async()=>{const b={action:'adddoc',title:$('#dt1').value,section:$('#ds1').value,icon:$('#di1').value,text:$('#dx1').value};$('#da').disabled=true;
+  try{const r=await post('admin',b,{'x-admin-key':sessionStorage.getItem('ak')||''});if(r.ok)adminDocs({t:`Ajouté : ${r.n} éléments publiés.`});else{$('#da').disabled=false;$('#dm').className='err';$('#dm').textContent=r.error==='missing'?'Titre et texte obligatoires.':r.error==='empty'?'Aucun contenu exploitable.':'Erreur. Réessayez.'}}catch(e){$('#da').disabled=false;$('#dm').className='err';$('#dm').textContent='Connexion impossible.'}};
+ $$('[data-del]').forEach(b=>b.onclick=async()=>{if(!confirm('Supprimer ce document de la bibliothèque ?'))return;await post('admin',{action:'deldoc',id:b.dataset.del},{'x-admin-key':sessionStorage.getItem('ak')||''});adminDocs()})}
 function toCover(){try{localStorage.removeItem('st')}catch(e){}document.body.classList.add('locked');cover()}
-function logout(){if(!confirm('Se déconnecter et effacer les données de ce téléphone ?'))return;['me','data','meta','st','pend'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});me=null;D=null;toCover()}
+function logout(){if(!confirm('Se déconnecter et effacer les données de ce téléphone ?'))return;['me','data','ver','meta','st','pend'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});me=null;D=null;toCover()}
 (function(){const st=ld('st'),d=ld('data');if(me&&d&&st&&Date.now()-st.t<432e5){initApp(d);restore();if(!STATIC)check(true)}else{cover();if(!STATIC&&me&&d)check(true)}})();
 if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
 </script></body></html>
