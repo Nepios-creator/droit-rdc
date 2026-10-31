@@ -122,6 +122,7 @@ nav button{border-radius:20px;padding:8px 0;transition:.2s}nav button.on{backgro
 .sig{position:absolute;bottom:14px;left:0;right:0;text-align:center;font:italic 11px system-ui;color:#ffffff4d;letter-spacing:.1em}
 .sig2{text-align:center;font:italic 11px system-ui;color:var(--mute);opacity:.5;margin:24px 0 0}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.srcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.srcs .chip{font-size:12px;padding:5px 10px;text-decoration:none;color:var(--ink)}
 </style></head><body class="locked"><div id="gate"></div>
 <header><button id="menu" aria-label="Sommaire">☰</button><h1>Drapp</h1><button id="fm">A−</button><button id="fp">A+</button></header>
 <main>
@@ -277,11 +278,15 @@ function bindPay(){$$('.paybtn').forEach(b=>b.onclick=async()=>{const c=b.closes
 function renderMe(){const m=meta();$('#v-me').innerHTML=`<div class="card"><h3 style="margin:0">${esc((me&&me.prenom)||'')} ${esc(m.nom||'')}</h3><p class="mute">Home ${esc(m.home||'')}</p></div>${STATIC?'<div class="card mute">Vos informations sont enregistrées sur cet appareil.</div>':`<div class="card"><b>Votre code personnel</b><p class="mute">Il permet de retrouver votre accès sur un nouveau téléphone, sans nouvelle validation. Un seul téléphone à la fois. Ne le partagez pas.</p><input class="codef" readonly value="${esc(m.code||'—')}" onclick="this.select()"></div>`}${payCard(m)}<div class="card"><button class="btn" id="lo1">Retour à la couverture</button> <button class="btn" id="lo2">Se déconnecter</button><p class="mute">« Retour à la couverture » donne accès à l'espace administrateur. « Se déconnecter » efface vos données sur ce téléphone ; votre code personnel permet de vous reconnecter.</p></div><p class="sig2">By Mr. Mayele</p>`;bindPay();$('#lo1').onclick=toCover;$('#lo2').onclick=logout}
 function bubble(c,t){const e=document.createElement('div');e.className='m '+c;e.textContent=t;$('#chat').appendChild(e);e.scrollIntoView({block:'end'});return e}
 async function ask(q){show('ai');q=(q||'').trim();if(!q)return;bubble('mu',q);const w=bubble('ma','…');
- try{const r=await post('assistant',{id:me.id,token:me.token,mode:'ask',q});if(r.error==='premium'){w.textContent='Cette fonction nécessite l\'option Premium.';return}
-  w.textContent=r.answer||'Une erreur est survenue.';if(r.refs&&r.refs.length){const s=document.createElement('div');s.className='mute';s.textContent='Extraits consultés : '+r.refs.slice(0,4).join(' · ');w.appendChild(s)}}
+ try{const r=await post('assistant',{id:me.id,token:me.token,mode:'ask',q,hist:chat.slice(-6)});if(r.error==='premium'){w.textContent="Cette fonction nécessite l'option Premium.";return}
+  const a=r.answer||'Une erreur est survenue.';w.textContent=a;if(r.answer)chat.push({r:'u',t:q},{r:'a',t:a});
+  const rf=(r.refs||[]).slice(0,3),wb=(r.web||[]).slice(0,4);
+  if(rf.length||wb.length){const b=document.createElement('div');b.className='srcs';
+   rf.forEach(x=>{const e=document.createElement('button');e.className='chip';e.textContent='📎 '+x.l;e.onclick=()=>go(x.g);b.appendChild(e)});
+   wb.forEach(x=>{const e=document.createElement('a');e.className='chip';e.href=x.u;e.target='_blank';e.rel='noopener noreferrer';e.textContent=(x.k==='intl'?'🌍 ':'🇨🇩 ')+x.l;b.appendChild(e)});w.appendChild(b)}}
  catch(e){w.textContent='Pas de connexion internet.'}}
 function aiInit(){const el=$('#v-ai');if(STATIC){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Bientôt disponible. Il répondra uniquement d\'après les documents de Drapp.</p></div>';return}if(locked()){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Il répond uniquement à partir des documents de l\'application, sans rien inventer, et vous propose des sujets à étudier. Réservé aux membres Premium.</p></div>'+payCard(meta());bindPay();return}
- if(!$('#chat')){el.innerHTML='<div class="card"><b>Assistant d\'étude</b><p class="mute">Posez une question : je réponds uniquement d\'après les documents de l\'application.</p><div id="sug2" class="row"></div></div><div id="chat"></div><div class="askbar"><input id="aqi" type="search" placeholder="Votre question…"><button class="btn p" id="asn">Envoyer</button></div>';
+ if(!$('#chat')){el.innerHTML='<div class="card"><b>Assistant d\'étude</b><p class="mute">Posez une question, même pratique : je m\'appuie d\'abord sur les documents de Drapp, puis sur les sites officiels (RDC en priorité, international ensuite).</p><div id="sug2" class="row"></div></div><div id="chat"></div><div class="askbar"><input id="aqi" type="search" placeholder="Votre question…"><button class="btn p" id="asn">Envoyer</button></div>';
   $('#asn').onclick=()=>{const v=$('#aqi').value;$('#aqi').value='';ask(v)};$('#aqi').onkeydown=e=>{if(e.key==='Enter')$('#asn').click()};showSug()}}
 let topics=null;
 function showSug(){const h=(topics||[]).map(t=>`<button class="chip" data-q="${esc(t)}">🎯 ${esc(t)}</button>`).join('');['#sug','#sug2'].forEach(s=>{const e=$(s);if(e){e.innerHTML=(s==='#sug'&&h?'<h2 class="h l3">Sujets d\'étude du jour</h2><div class="row">'+h+'</div>':h)}});$$('[data-q]').forEach(b=>b.onclick=()=>{aiInit();ask(b.dataset.q)})}
