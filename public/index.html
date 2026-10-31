@@ -123,10 +123,34 @@ nav button{border-radius:20px;padding:8px 0;transition:.2s}nav button.on{backgro
 .sig2{text-align:center;font:italic 11px system-ui;color:var(--mute);opacity:.5;margin:24px 0 0}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
 .srcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.srcs .chip{font-size:12px;padding:5px 10px;text-decoration:none;color:var(--ink)}
+nav button{position:relative}.dot{position:absolute;top:6px;right:24%;width:9px;height:9px;border-radius:50%;background:#ef4444;display:none}.dot.on{display:block}
+.aihead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0 8px;flex-wrap:wrap}.aihead b{display:block;font-size:17px}.aihead .mute{font-size:12px}
+.m{position:relative;max-width:92%;padding:10px 14px 8px;border-radius:18px;margin:10px 0;font-size:15.5px;line-height:1.6;animation:fi .25s}
+.ma{background:var(--card);border:1px solid var(--line);border-bottom-left-radius:6px;margin-right:auto;color:var(--ink)}
+.mu{margin-left:auto;border-bottom-right-radius:6px;color:#fff}
+.mt{user-select:text;-webkit-user-select:text;white-space:pre-wrap;word-break:break-word}.ma .mt{white-space:normal}
+.mt p{margin:0 0 .6em}.mt p:last-child{margin:0}.mt ul{margin:.2em 0 .6em;padding-left:1.2em}
+.typing .mt:after{content:'▍';animation:bl 1s steps(2) infinite;margin-left:1px;color:var(--pri)}@keyframes bl{50%{opacity:0}}
+.mmeta{font-size:11px;opacity:.6;margin-top:4px}
+.mtools{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.mtools button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:4px 10px;font-size:12px}
+.mu .mtools button{background:#ffffff26;color:#fff;border-color:#ffffff40}
+.dots{display:inline-flex;gap:4px;padding:6px 2px}.dots i{width:7px;height:7px;border-radius:50%;background:var(--mute);animation:dp 1.2s infinite}.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}@keyframes dp{0%,60%,100%{opacity:.3}30%{opacity:1}}
+.composer{position:sticky;bottom:calc(88px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:flex-end;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);padding:8px 0}
+.composer textarea{flex:1;resize:none;max-height:140px;font:16px/1.4 system-ui,sans-serif;padding:11px 14px;border-radius:22px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.send{width:46px;height:46px;border:0;border-radius:50%;background:linear-gradient(120deg,#4338ca,#0891b2);color:#fff;font-size:18px;flex:none}.send:disabled{opacity:.5}
+.sheet{position:fixed;inset:0;z-index:60;background:#0009;display:none;overflow:auto;padding:16px}.sheet.on{display:block}.sheetc{background:var(--card);border-radius:20px;padding:16px;max-width:520px;margin:0 auto;color:var(--ink)}
+.hi{cursor:pointer}
+.dsep{text-align:center;font-size:11px;color:var(--mute);margin:14px 0 6px;text-transform:capitalize}.dsep span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.gm{display:flex;gap:9px;margin:10px 0}.gav{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:12px}
+.gb{background:var(--card);border:1px solid var(--line);border-radius:16px;border-top-left-radius:4px;padding:8px 12px;max-width:calc(100% - 46px);min-width:0}.gm.mine .gb{border-color:color-mix(in srgb,var(--pri) 45%,var(--line))}
+.gh{font-size:12px;color:var(--mute);margin-bottom:2px}.gh b{color:var(--ink)}.gt{white-space:pre-wrap;word-break:break-word;font-size:15px;line-height:1.55}
+.gq{border-left:3px solid var(--acc);background:var(--bg);border-radius:6px;padding:4px 8px;margin:2px 0 6px;font-size:12.5px;color:var(--mute)}
+.gx{display:flex;gap:12px;margin-top:4px}.gx button{background:none;border:0;color:var(--pri);font-size:12px;padding:2px 0}
+.replybar{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;padding:6px 10px;font-size:12.5px}
 </style></head><body class="locked"><div id="gate"></div>
 <header><button id="menu" aria-label="Sommaire">☰</button><h1>Drapp</h1><button id="fm">A−</button><button id="fp">A+</button></header>
 <main>
-<section id="v-lib" class="view on"><div id="daily"></div><div id="sug"></div><div id="lib"></div></section><section id="v-lire" class="view"><div id="doc"></div></section><section id="v-ai" class="view"></section><section id="v-me" class="view"></section>
+<section id="v-lib" class="view on"><div id="daily"></div><div id="sug"></div><div id="lib"></div></section><section id="v-lire" class="view"><div id="doc"></div></section><section id="v-ai" class="view"></section><section id="v-me" class="view"></section><section id="v-grp" class="view"></section>
 <section id="v-search" class="view"><input id="q" type="search" placeholder="Rechercher un mot, une expression…" autocomplete="off"><div id="results" class="mute" style="margin-top:10px">Tapez au moins 2 lettres.</div></section>
 <section id="v-notes" class="view"><div id="notes"></div>
 <div class="row" style="margin-top:14px"><button class="btn" id="exp">Exporter mes annotations</button><label class="btn">Importer<input id="imp" type="file" accept="application/json" hidden></label></div>
@@ -135,7 +159,7 @@ nav button{border-radius:20px;padding:8px 0;transition:.2s}nav button.on{backgro
 <div id="bar"><div>
 <button class="sw c-y" data-c="y" aria-label="Jaune"></button><button class="sw c-g" data-c="g" aria-label="Vert"></button><button class="sw c-b" data-c="b" aria-label="Bleu"></button><button class="sw c-r" data-c="r" aria-label="Rouge"></button>
 <button class="btn" id="addnote">💬 Commenter</button></div></div>
-<nav><button data-v="lib" class="on"><span>📚</span>Biblio</button><button data-v="search"><span>🔍</span>Chercher</button><button data-v="ai"><span>✨</span>Assistant</button><button data-v="notes"><span>✏️</span>Notes</button><button data-v="me"><span>👤</span>Moi</button></nav>
+<nav><button data-v="lib" class="on"><span>📚</span>Biblio</button><button data-v="search"><span>🔍</span>Chercher</button><button data-v="ai"><span>✨</span>Assistant</button><button data-v="grp"><span>💬</span>Groupe<i class="dot" id="gdot"></i></button><button data-v="me"><span>👤</span>Moi</button></nav>
 <div id="drawer"><aside id="toc"></aside></div>
 <dialog id="dlg"><div id="dq" class="mute"></div><textarea id="dt" placeholder="Votre commentaire…"></textarea>
 <div class="row" style="margin-top:10px"><button class="btn p" id="ds">Enregistrer</button><button class="btn" id="dd">Supprimer le surlignage</button><button class="btn" id="dc">Fermer</button></div></dialog>
@@ -150,7 +174,7 @@ const save=()=>{try{localStorage.setItem(K,JSON.stringify(ann))}catch(e){}};
 let fs=+(localStorage.getItem('fs')||18);const setfs=()=>document.documentElement.style.setProperty('--fs',fs+'px');setfs();
 $('#fm').onclick=()=>{fs=Math.max(14,fs-1);localStorage.setItem('fs',fs);setfs()};
 $('#fp').onclick=()=>{fs=Math.min(28,fs+1);localStorage.setItem('fs',fs);setfs()};
-function show(v){curV=v;setTimeout(saveState,0);$$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));if(v==='notes')renderNotes();if(v==='me')renderMe();if(v==='ai')aiInit();if(v==='lib')renderLib();hideBar()}
+function show(v){curV=v;setTimeout(saveState,0);$$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));if(v==='notes')renderNotes();if(v==='me')renderMe();if(v==='ai')aiInit();if(v==='grp')grpInit();if(v==='lib')renderLib();hideBar()}
 $$('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
 function go(id){if(id.includes(':')&&(!D||D.id!==id.split(':')[0]))openDoc(id.split(':')[0]);show('lire');$('#drawer').classList.remove('on');const el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)}}
 function paraHTML(a,pi){const t=a.p[pi];const segs=[];ann.forEach(n=>n.segs.forEach(s=>{if(s.a===a.gid&&s.p===pi)segs.push({s:s.s,e:s.e,n})}));
@@ -198,20 +222,25 @@ $('#exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObje
 $('#imp').onchange=async e=>{try{const j=JSON.parse(await e.target.files[0].text());if(Array.isArray(j)){const ids=new Set(ann.map(x=>x.id));j.forEach(x=>{if(x&&x.id&&x.segs&&!ids.has(x.id))ann.push(x)});save();renderDoc();renderNotes()}}catch(_){alert('Fichier invalide')}};
 /* accès */
 const CFG=window.DRAPP||{},STATIC=CFG.mode!=='server';
+let DC=null;
+const idb=()=>new Promise((res,rej)=>{const r=indexedDB.open('drapp',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+const idbGet=async k=>{try{const d=await idb();return await new Promise(res=>{const q=d.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>res(q.result||null);q.onerror=()=>res(null)})}catch(e){return null}};
+const idbSet=async(k,v)=>{try{const d=await idb();await new Promise(res=>{const t=d.transaction('kv','readwrite');v==null?t.objectStore('kv').delete(k):t.objectStore('kv').put(v,k);t.oncomplete=res;t.onerror=res})}catch(e){}};
+function setData(v){DC=v;idbSet('data',v)}
 let curV='lib';
 function saveState(){if(document.body.classList.contains('locked'))return;sv('st',{v:curV,doc:D&&D.id,y:scrollY,t:Date.now()})}
 addEventListener('scroll',()=>{clearTimeout(window._sv);window._sv=setTimeout(saveState,400)},{passive:true});
 document.addEventListener('visibilitychange',saveState);
 function restore(){const st=ld('st');if(!st)return;if(st.v==='lire'&&st.doc)openDoc(st.doc);else if(st.v&&st.v!=='lire')show(st.v);setTimeout(()=>scrollTo(0,st.y||0),80)}
-async function loadStatic(){try{const r=await fetch('docs.json');const d=await r.json();sv('data',d);return d}catch(e){return ld('data')}}
+async function loadStatic(){try{const r=await fetch('docs.json');const d=await r.json();setData(d);return d}catch(e){return DC}}
 const payInfo=()=>STATIC?{number:CFG.payNumber,price:CFG.payPrice}:(meta().pay||{});
 function enter(d){initApp(d)}
 function offer(next){const p=payInfo();G(`<div class="book"><div class="panel" style="text-align:center"><div style="font-size:40px">✨</div><h2>Option Premium</h2><p class="mute">Soutenez Drapp et débloquez les fonctions avancées.</p><div class="card" style="text-align:left"><b>Comment payer (Illicocash)</b><ol class="mute" style="padding-left:18px;margin:8px 0"><li>Envoyez <b>${esc(p.price||'le montant indiqué')}</b> au <b>${esc(p.number)}</b></li><li>Gardez la référence de la transaction</li><li>${STATIC?"Envoyez-la à l'administrateur pour activer votre accès":'Saisissez-la ci-dessous'}</li></ol>${STATIC?'':'<input class="refin" type="text" placeholder="Référence du paiement"><button class="btn p paybtn">J\'ai payé</button><p class="mute paymsg"></p>'}</div><button class="btn p" id="ol" style="width:100%;margin-top:10px">Continuer</button></div></div>`);bindPay();$('#ol').onclick=next}
 function cover(){G(`<div class="hero"><i class="bl b1"></i><i class="bl b2"></i><i class="bl b3"></i><span class="fl f1">⚖️</span><span class="fl f2">📜</span><span class="fl f3">🏛️</span><span class="fl f4">📚</span>
 <div class="hc"><div class="logo">D</div><h1 class="wm">Drapp</h1><p class="tg">Le droit congolais,<br>à portée de main.</p><button class="go" id="open">Entrer</button>${STATIC?'':'<div class="lk"><button id="cd">J\'ai un code</button> · <button id="adm">Administrateur</button></div>'}</div><div class="sig">By Mr. Mayele</div></div>`);
  $('#open').onclick=openBook;if(!STATIC){$('#adm').onclick=()=>adminLogin();$('#cd').onclick=recoverForm}}
-async function openBook(){if(STATIC){const d=ld('data')||await loadStatic();if(!d)return;me?enter(d):form();return}
- const d=ld('data');if(me&&d){enter(d);check(true)}else if(me){pending();check()}else form()}
+async function openBook(){if(STATIC){const d=DC||await loadStatic();if(!d)return;me?enter(d):form();return}
+ const d=DC;if(me&&d){enter(d);check(true)}else if(me){pending();check()}else form()}
 function payCard(m){if(m.premium)return '<div class="card">✅ Premium actif</div>';const p=m.pay||{};if(!p.number)return '';
  return `<div class="card"><b>Option Premium</b><p class="mute">${m.claimed?'Paiement déclaré : en attente de confirmation.':`Payez ${esc(p.price||'')} par Illicocash au ${esc(p.number)}.`}</p>${STATIC?'':'<input class="refin" type="text" placeholder="Référence du paiement"><button class="btn p paybtn">J\'ai payé</button><p class="mute paymsg"></p>'}</div>`}
 
@@ -239,9 +268,9 @@ function blocked(st){const t={rejected:['Demande refusée',"L'administrateur n'a
  if(st==='unknown'){me=null;try{localStorage.removeItem('me')}catch(e){}}
  G(`<div class="book"><div class="panel" style="text-align:center"><div style="font-size:42px">🔒</div><h2>${t[0]}</h2><p>${t[1]}</p><button class="btn p" id="pb">Retour</button></div></div>`);$('#pb').onclick=cover}
 async function check(silent){if(!me)return;
- try{const r=await post('access',{id:me.id,token:me.token,v:ld('data')?ld('ver'):null});if(r.same&&!ld('data')){sv('ver',null);return check(silent)}
-  if(r.status==='approved'&&(r.data||(r.same&&ld('data')))){const dd=r.data||ld('data');if(r.data){sv('data',r.data);sv('ver',r.ver);if(silent&&docs.length&&!document.body.classList.contains('locked')){buildDocs(r.data);renderLib();daily()}}sv('meta',{premium:r.premium,need:r.need,claimed:r.claimed,pay:r.pay,code:r.code,home:r.home,nom:r.nom});if(!silent)enter(dd);return}
-  try{localStorage.removeItem('data')}catch(e){}
+ try{const r=await post('access',{id:me.id,token:me.token,v:DC?ld('ver'):null});if(r.same&&!DC){sv('ver',null);return check(silent)}
+  if(r.status==='approved'&&(r.data||(r.same&&DC))){const dd=r.data||DC;if(r.data){setData(r.data);sv('ver',r.ver);if(silent&&docs.length&&!document.body.classList.contains('locked')){buildDocs(r.data);renderLib();daily()}}sv('meta',{premium:r.premium,need:r.need,claimed:r.claimed,pay:r.pay,code:r.code,home:r.home,nom:r.nom});if(!silent)enter(dd);return}
+  setData(null)
   if(r.status==='pending'||r.status==='unpaid'){const np={st:r.status,need:r.need,claimed:r.claimed,pay:r.pay},ch=JSON.stringify(np)!==JSON.stringify(ld('pend'));sv('pend',np);if(silent){if(D)location.reload();return}if(ch)pending();else pm('Toujours en attente.');return}
   if(silent){if(D)location.reload();return}
   blocked(r.status)
@@ -254,10 +283,10 @@ function adminLogin(err){G(`<div class="book"><div class="panel"><h2>Administrat
 async function adminList(){try{const r=await adm('list');if(r._s===401){sessionStorage.removeItem('ak');adminLogin('Mot de passe incorrect.');return}
  const U=r.users||[],lab={pending:'En attente',approved:'Validé',rejected:'Refusé',revoked:'Retiré'};
  const m=(f,s)=>f==='all'||(f==='off'?s==='rejected'||s==='revoked':s===f);const cnt=f=>U.filter(u=>m(f,u.status)).length;
- G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Demandes d'accès</h2><span><button class="btn" id="ad">📚 Documents</button> <button class="btn" id="aq">Quitter</button></span></div>
+ G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Demandes d'accès</h2><span><button class="btn" id="ad">📚 Documents</button> <button class="btn" id="as">🌐 Sites</button> <button class="btn" id="ag">💬 Groupe</button> <button class="btn" id="aq">Quitter</button></span></div>
 <div class="row" style="margin:10px 0">${[['pending','En attente'],['approved','Validés'],['off','Refusés/retirés'],['all','Tous']].map(f=>`<button class="btn ${af===f[0]?'p':''}" data-f="${f[0]}">${f[1]} (${cnt(f[0])})</button>`).join('')}</div>
 ${U.filter(u=>m(af,u.status)).map(u=>`<div class="u"><b>${esc(u.nom)} ${esc(u.postnom)} ${esc(u.prenom)}</b><span class="tag">Home ${esc(u.home)}</span><span class="tag st-${u.status}">${lab[u.status]||u.status}</span><div class="mute">${new Date(u.created).toLocaleString('fr-FR')}</div>${u.code?`<input class="codef" readonly value="${u.code}" onclick="this.select()">`:''}${u.premium?'<span class="tag st-approved">Premium</span>':''}${u.pay&&u.pay.status==='claimed'?`<div class="mute">💳 Paiement déclaré : ${esc(u.pay.ref)}</div>`:''}<div class="row" style="margin-top:8px">${u.status==='approved'?`<button class="btn" data-a="revoke" data-i="${u.id}">Retirer l'accès</button>`:`<button class="btn p" data-a="approve" data-i="${u.id}">${u.pay&&u.pay.status==='claimed'?'Valider accès + paiement':'Valider l\'accès'}</button>`}${u.status==='pending'?`<button class="btn" data-a="reject" data-i="${u.id}">Refuser</button>`:''}${u.status==='approved'?`<button class="btn" data-a="newcode" data-i="${u.id}">Nouveau code</button>`:''}${u.pay&&u.pay.status==='claimed'?`<button class="btn p" data-a="confirmpay" data-i="${u.id}">Confirmer paiement</button>`:''}${u.premium?`<button class="btn" data-a="unpremium" data-i="${u.id}">Retirer Premium</button>`:(u.status==='approved'?`<button class="btn" data-a="premium" data-i="${u.id}">Donner Premium</button>`:'')}<button class="btn" data-a="delete" data-i="${u.id}">Supprimer</button></div></div>`).join('')||'<p class="mute">Aucune demande.</p>'}</div></div>`);
- $('#aq').onclick=()=>{sessionStorage.removeItem('ak');cover()};$('#ad').onclick=()=>adminDocs();
+ $('#aq').onclick=()=>{sessionStorage.removeItem('ak');cover()};$('#ad').onclick=()=>adminDocs();$('#as').onclick=()=>adminSites();$('#ag').onclick=()=>adminGroup();
  $$('[data-f]').forEach(b=>b.onclick=()=>{af=b.dataset.f;adminList()});
  $$('[data-a]').forEach(b=>b.onclick=async()=>{if(b.dataset.a==='delete'&&!confirm('Supprimer cette demande ?'))return;await adm(b.dataset.a,b.dataset.i);if(b.dataset.a==='approve')af='approved';adminList()})
  }catch(e){adminLogin('Connexion impossible (internet requis).')}}
@@ -275,40 +304,146 @@ const meta=()=>STATIC?{premium:false,need:false,pay:{number:CFG.payNumber,price:
 const locked=()=>{const m=meta();return m.need&&!m.premium};
 function bindPay(){$$('.paybtn').forEach(b=>b.onclick=async()=>{const c=b.closest('.card'),ref=c.querySelector('.refin').value.trim();if(ref.length<4){c.querySelector('.paymsg').textContent='Référence trop courte.';return}
  try{const r=await post('pay',{id:me.id,token:me.token,ref});c.querySelector('.paymsg').textContent=(r.ok?(()=>{const q=ld('pend');if(q){q.claimed=true;sv('pend',q)}return 'Envoyé. En attente de confirmation.'})():'Erreur.')}catch(e){c.querySelector('.paymsg').textContent='Pas de connexion.'}})}
-function renderMe(){const m=meta();$('#v-me').innerHTML=`<div class="card"><h3 style="margin:0">${esc((me&&me.prenom)||'')} ${esc(m.nom||'')}</h3><p class="mute">Home ${esc(m.home||'')}</p></div>${STATIC?'<div class="card mute">Vos informations sont enregistrées sur cet appareil.</div>':`<div class="card"><b>Votre code personnel</b><p class="mute">Il permet de retrouver votre accès sur un nouveau téléphone, sans nouvelle validation. Un seul téléphone à la fois. Ne le partagez pas.</p><input class="codef" readonly value="${esc(m.code||'—')}" onclick="this.select()"></div>`}${payCard(m)}<div class="card"><button class="btn" id="lo1">Retour à la couverture</button> <button class="btn" id="lo2">Se déconnecter</button><p class="mute">« Retour à la couverture » donne accès à l'espace administrateur. « Se déconnecter » efface vos données sur ce téléphone ; votre code personnel permet de vous reconnecter.</p></div><p class="sig2">By Mr. Mayele</p>`;bindPay();$('#lo1').onclick=toCover;$('#lo2').onclick=logout}
-function bubble(c,t){const e=document.createElement('div');e.className='m '+c;e.textContent=t;$('#chat').appendChild(e);e.scrollIntoView({block:'end'});return e}
-async function ask(q){show('ai');q=(q||'').trim();if(!q)return;bubble('mu',q);const w=bubble('ma','…');
- try{const r=await post('assistant',{id:me.id,token:me.token,mode:'ask',q,hist:chat.slice(-6)});if(r.error==='premium'){w.textContent="Cette fonction nécessite l'option Premium.";return}
-  const a=r.answer||'Une erreur est survenue.';w.textContent=a;if(r.answer)chat.push({r:'u',t:q},{r:'a',t:a});
-  const rf=(r.refs||[]).slice(0,3),wb=(r.web||[]).slice(0,4);
-  if(rf.length||wb.length){const b=document.createElement('div');b.className='srcs';
-   rf.forEach(x=>{const e=document.createElement('button');e.className='chip';e.textContent='📎 '+x.l;e.onclick=()=>go(x.g);b.appendChild(e)});
-   wb.forEach(x=>{const e=document.createElement('a');e.className='chip';e.href=x.u;e.target='_blank';e.rel='noopener noreferrer';e.textContent=(x.k==='intl'?'🌍 ':'🇨🇩 ')+x.l;b.appendChild(e)});w.appendChild(b)}}
- catch(e){w.textContent='Pas de connexion internet.'}}
-function aiInit(){const el=$('#v-ai');if(STATIC){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Bientôt disponible. Il répondra uniquement d\'après les documents de Drapp.</p></div>';return}if(locked()){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Il répond uniquement à partir des documents de l\'application, sans rien inventer, et vous propose des sujets à étudier. Réservé aux membres Premium.</p></div>'+payCard(meta());bindPay();return}
- if(!$('#chat')){el.innerHTML='<div class="card"><b>Assistant d\'étude</b><p class="mute">Posez une question, même pratique : je m\'appuie d\'abord sur les documents de Drapp, puis sur les sites officiels (RDC en priorité, international ensuite).</p><div id="sug2" class="row"></div></div><div id="chat"></div><div class="askbar"><input id="aqi" type="search" placeholder="Votre question…"><button class="btn p" id="asn">Envoyer</button></div>';
-  $('#asn').onclick=()=>{const v=$('#aqi').value;$('#aqi').value='';ask(v)};$('#aqi').onkeydown=e=>{if(e.key==='Enter')$('#asn').click()};showSug()}}
-let topics=null;
-function showSug(){const h=(topics||[]).map(t=>`<button class="chip" data-q="${esc(t)}">🎯 ${esc(t)}</button>`).join('');['#sug','#sug2'].forEach(s=>{const e=$(s);if(e){e.innerHTML=(s==='#sug'&&h?'<h2 class="h l3">Sujets d\'étude du jour</h2><div class="row">'+h+'</div>':h)}});$$('[data-q]').forEach(b=>b.onclick=()=>{aiInit();ask(b.dataset.q)})}
-async function sugLoad(){if(STATIC||locked())return;try{const r=await post('assistant',{id:me.id,token:me.token,mode:'suggest'});if(r.topics){topics=r.topics;showSug()}}catch(e){}}
+function renderMe(){const m=meta();$('#v-me').innerHTML=`<div class="card"><h3 style="margin:0">${esc((me&&me.prenom)||'')} ${esc(m.nom||'')}</h3><p class="mute">Home ${esc(m.home||'')}</p></div>${STATIC?'<div class="card mute">Vos informations sont enregistrées sur cet appareil.</div>':`<div class="card"><b>Votre code personnel</b><p class="mute">Il permet de retrouver votre accès sur un nouveau téléphone, sans nouvelle validation. Un seul téléphone à la fois. Ne le partagez pas.</p><input class="codef" readonly value="${esc(m.code||'—')}" onclick="this.select()"></div>`}${payCard(m)}<div class="card"><button class="btn" id="mn">✏️ Mes annotations</button> <button class="btn" id="lo1">Retour à la couverture</button> <button class="btn" id="lo2">Se déconnecter</button><p class="mute">« Retour à la couverture » donne accès à l'espace administrateur. « Se déconnecter » efface vos données sur ce téléphone ; votre code personnel permet de vous reconnecter.</p></div><p class="sig2">By Mr. Mayele</p>`;bindPay();$('#mn').onclick=()=>show('notes');$('#lo1').onclick=toCover;$('#lo2').onclick=logout}
 function recoverForm(){G(`<div class="book"><div class="panel"><h2>Nouveau téléphone</h2><p class="mute">Entrez votre code personnel. Votre accès sera transféré ici et l'ancien téléphone sera désactivé.</p><input id="rc" type="text" placeholder="XXXX-XXXX-XXXX" autocapitalize="characters"><div class="row"><button class="btn p" id="rs">Récupérer mon accès</button><button class="btn" id="rb">Retour</button></div><p id="re" class="err"></p></div></div>`);
  $('#rb').onclick=cover;$('#rs').onclick=async()=>{try{const r=await post('recover',{code:$('#rc').value});if(!r.id){$('#re').textContent=r.error==='status'?"Ce compte n'est plus actif.":'Code invalide.';return}
-  me={id:r.id,token:r.token,prenom:r.prenom};sv('me',me);try{localStorage.removeItem('data')}catch(e){}pending();check()}catch(e){$('#re').textContent='Connexion impossible.'}}}
+  me={id:r.id,token:r.token,prenom:r.prenom};sv('me',me);setData(null);pending();check()}catch(e){$('#re').textContent='Connexion impossible.'}}}
 
+const loadJs=u=>new Promise((res,rej)=>{if(document.querySelector('script[src="'+u+'"]'))return res();const e=document.createElement('script');e.src=u;e.onload=res;e.onerror=()=>rej(new Error('lib'));document.head.appendChild(e)});
+async function fileText(f,M){const n=f.name.toLowerCase();
+ if(n.endsWith('.pdf')){M('Chargement du lecteur PDF…');await loadJs('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise,out=[];
+  for(let i=1;i<=pdf.numPages;i++){M(`Lecture du PDF : page ${i}/${pdf.numPages}`);const c=await(await pdf.getPage(i)).getTextContent();let y=null,line='';for(const it of c.items){const yy=Math.round(it.transform[5]);if(y!==null&&Math.abs(yy-y)>3){out.push(line);line=''}line+=it.str;y=yy}out.push(line);out.push('')}
+  return out.join('\n')}
+ if(n.endsWith('.docx')){M('Lecture du document Word…');await loadJs('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js');return (await mammoth.extractRawText({arrayBuffer:await f.arrayBuffer()})).value}
+ if(n.endsWith('.doc'))throw new Error('doc');
+ return await f.text()}
 async function adminDocs(msg){let L=[];try{const r=await adm('listdocs');L=r.docs||[]}catch(e){}
  G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Documents ajoutés</h2><button class="btn" id="dq">Retour</button></div>
-<p class="mute">Collez un texte (ou choisissez un fichier .txt) : il est organisé automatiquement en titres, articles et sections, puis publié dans la bibliothèque.</p>
+<p class="mute">Collez un texte (ou choisissez un fichier PDF, Word ou texte) : il est organisé automatiquement en titres, articles et sections, puis publié dans la bibliothèque.</p>
 <label>Titre</label><input id="dt1" type="text" placeholder="Ex. Manuel de droit civil"><label>Espace</label><select id="ds1" class="refin">${SECS.map(x=>`<option>${x}</option>`).join('')}</select>
 <label>Icône</label><input id="di1" type="text" value="📖" maxlength="4"><label>Texte du document</label><textarea id="dx1" rows="7" placeholder="Collez le texte ici…" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px"></textarea>
-<input id="df1" type="file" accept=".txt,.md,text/plain" style="margin:8px 0"><button class="btn p" id="da">Ajouter à la bibliothèque</button><p id="dm" class="${msg&&msg.err?'err':'mute'}">${esc((msg&&msg.t)||'')}</p><hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+<input id="df1" type="file" style="margin:8px 0"><p class="mute" style="margin:0 0 6px">Fichiers acceptés : PDF (avec texte), Word (.docx), texte (.txt, .md).</p><button class="btn p" id="da">Ajouter à la bibliothèque</button><p id="dm" class="${msg&&msg.err?'err':'mute'}">${esc((msg&&msg.t)||'')}</p><hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
 ${L.map(d=>`<div class="u"><b>${esc(d.icon)} ${esc(d.title)}</b><span class="tag">${esc(d.section)}</span><div class="mute">${d.n} éléments</div><button class="btn" data-del="${d.id}" style="margin-top:6px">Supprimer</button></div>`).join('')||'<p class="mute">Aucun document ajouté pour l\'instant.</p>'}</div></div>`);
  $('#dq').onclick=()=>adminList();
- $('#df1').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('#dx1').value=r.result;if(!$('#dt1').value)$('#dt1').value=f.name.replace(/\.[^.]+$/,'')};r.readAsText(f)};
- $('#da').onclick=async()=>{const b={action:'adddoc',title:$('#dt1').value,section:$('#ds1').value,icon:$('#di1').value,text:$('#dx1').value};$('#da').disabled=true;
-  try{const r=await post('admin',b,{'x-admin-key':sessionStorage.getItem('ak')||''});if(r.ok)adminDocs({t:`Ajouté : ${r.n} éléments publiés.`});else{$('#da').disabled=false;$('#dm').className='err';$('#dm').textContent=r.error==='missing'?'Titre et texte obligatoires.':r.error==='empty'?'Aucun contenu exploitable.':'Erreur. Réessayez.'}}catch(e){$('#da').disabled=false;$('#dm').className='err';$('#dm').textContent='Connexion impossible.'}};
+ const H=()=>({'x-admin-key':sessionStorage.getItem('ak')||''}),M=(t,e)=>{$('#dm').className=e?'err':'mute';$('#dm').textContent=t};
+ $('#df1').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const t=await fileText(f,M);if(t.trim().length<50){M('Aucun texte trouvé (PDF scanné ?). Utilisez un PDF contenant du texte, ou un fichier Word.',1);return}
+  $('#dx1').value=t;if(!$('#dt1').value)$('#dt1').value=f.name.replace(/\.[^.]+$/,'');M(`Fichier lu : ${t.length.toLocaleString('fr-FR')} caractères. Vérifiez le titre, puis ajoutez.`)}
+  catch(x){M(String(x.message)==='doc'?"Ancien format .doc non pris en charge : enregistrez-le en .docx dans Word, puis réessayez.":'Lecture impossible. Vérifiez votre connexion internet et le fichier.',1)}};
+ $('#da').onclick=async()=>{const title=$('#dt1').value.trim(),txt=$('#dx1').value;if(title.length<2||txt.trim().length<20){M('Titre et texte obligatoires.',1);return}
+  $('#da').disabled=true;const parts=[];let cur='';for(const ln of txt.split('\n')){if(cur.length+ln.length>800000&&cur){parts.push(cur);cur=''}cur+=ln+'\n'}if(cur.trim())parts.push(cur);
+  try{let tot=0;for(let i=0;i<parts.length;i++){M(`Envoi ${i+1}/${parts.length}…`);const r=await post('admin',{action:'adddoc',title:parts.length>1?`${title} — Partie ${i+1}/${parts.length}`:title,section:$('#ds1').value,icon:$('#di1').value,text:parts[i]},H());
+   if(!r.ok){$('#da').disabled=false;M(r.error==='empty'?'Aucun contenu exploitable.':'Erreur. Réessayez.',1);return}tot+=r.n}
+   adminDocs({t:`Ajouté : ${tot} éléments publiés${parts.length>1?` en ${parts.length} parties`:''}.`})}
+  catch(e){$('#da').disabled=false;M('Connexion impossible.',1)}};
  $$('[data-del]').forEach(b=>b.onclick=async()=>{if(!confirm('Supprimer ce document de la bibliothèque ?'))return;await post('admin',{action:'deldoc',id:b.dataset.del},{'x-admin-key':sessionStorage.getItem('ak')||''});adminDocs()})}
+async function adminSites(msg){let r={stats:[],queue:{},errs:[]};try{r=await adm('srcstat')}catch(e){}
+ const q=r.queue||{},H=()=>({'x-admin-key':sessionStorage.getItem('ak')||''});
+ G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Sites officiels</h2><button class="btn" id="sq">Retour</button></div>
+<p class="mute">L'assistant cherche d'abord dans cet index, gratuit et illimité. L'exploration continue automatiquement toutes les 10 minutes.</p>
+<div class="card"><b>File d'exploration</b><p class="mute">En attente : ${q.todo||0} · En cours : ${q.busy||0} · Terminées : ${q.done||0} · Erreurs : ${q.err||0}</p><div class="row"><button class="btn p" id="sn">Indexer maintenant</button><button class="btn" id="sr">Réessayer les erreurs</button></div><p id="sl" class="mute">${esc(msg||'')}</p></div>
+<div class="card"><b>Ajouter une page ou un site</b><input id="su" class="refin" type="text" placeholder="https://www.exemple.cd/page"><select id="ss" class="refin"><option value="rdc">RDC (priorité)</option><option value="intl">International</option></select><div class="row"><button class="btn p" id="sa">Ajouter</button><button class="btn" id="sall">Ajouter tous les sites autorisés</button></div></div>
+<div class="card"><b>Contenu indexé</b>${(r.stats||[]).map(x=>`<div class="u"><b>${esc(x.domain)}</b><span class="tag">${x.scope==='intl'?'International':'RDC'}</span><div class="mute">${x.pages} pages · ${x.chunks} blocs</div><button class="btn" data-dd="${esc(x.domain)}" style="margin-top:6px">Supprimer</button></div>`).join('')||'<p class="mute">Rien d\'indexé pour l\'instant.</p>'}</div>
+${(r.errs||[]).length?`<div class="card"><b>Dernières erreurs</b>${r.errs.map(e=>`<p class="mute" style="word-break:break-all">${esc(e.url)}<br>${esc(e.note||'')}</p>`).join('')}</div>`:''}</div></div>`);
+ $('#sq').onclick=()=>adminList();
+ $('#sn').onclick=async()=>{$('#sn').disabled=true;let tot=0,left=1,n=0;while(left>0&&n<12){n++;try{const x=await adm('crawlnow');tot+=x.processed||0;left=x.left||0;$('#sl').textContent=`Indexation… ${tot} pages traitées, ${left} en attente`;if(!x.processed)break}catch(e){$('#sl').textContent='Erreur de connexion';break}}adminSites(`Terminé : ${tot} pages traitées, ${left} en attente.`)};
+ $('#sr').onclick=async()=>{await adm('retryerrs');adminSites('Erreurs remises en file.')};
+ $('#sa').onclick=async()=>{const u=$('#su').value.trim();if(u.length<4)return;await post('admin',{action:'addsrc',url:u,scope:$('#ss').value},H());adminSites('Ajouté à la file.')};
+ $('#sall').onclick=async()=>{await adm('seedall');adminSites('Tous les sites autorisés ont été ajoutés à la file.')};
+ $$('[data-dd]').forEach(b=>b.onclick=async()=>{if(!confirm('Supprimer tout le contenu indexé de ce site ?'))return;await post('admin',{action:'delsrc',domain:b.dataset.dd},H());adminSites('Site supprimé.')})}
+/* conversations de l'assistant (enregistrées sur l'appareil) */
+let CH=[],curC=null,busy=false,topics=null,skipType=false;
+async function chLoad(){CH=(await idbGet('chats'))||[]}
+function chSave(){clearTimeout(window._cs);window._cs=setTimeout(()=>idbSet('chats',CH.slice(0,60)),250)}
+const fmtT=t=>{const c=String(t).replace(/\*\*/g,'').replace(/^#{1,6}\s*/gm,'').replace(/(^|\s)\*(\S[^*]*)\*/g,'$1$2');
+ return c.split(/\n{2,}/).map(par=>{let h='',L=[],T=[];const fT=()=>{if(T.length){h+='<p>'+T.map(esc).join('<br>')+'</p>';T=[]}},fL=()=>{if(L.length){h+='<ul>'+L.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';L=[]}};
+  for(const l of par.split('\n')){if(/^\s*[-•]\s+/.test(l)){fT();L.push(l.replace(/^\s*[-•]\s+/,''))}else{fL();T.push(l)}}fT();fL();return h}).join('')};
+const hm=ts=>new Date(ts).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+const endScroll=()=>scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+const flash=(b,t)=>{const o=b.textContent;b.textContent=t;setTimeout(()=>b.textContent=o,1400)};
+function selAll(el){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)}
+function fillSrc(d,m){const b=d.querySelector('.srcs');if(!b)return;(m.refs||[]).forEach(x=>{const e=document.createElement('button');e.className='chip';e.textContent='📎 '+x.l;e.onclick=()=>go(x.g);b.appendChild(e)});(m.web||[]).forEach(x=>{const e=document.createElement('a');e.className='chip';e.href=x.u;e.target='_blank';e.rel='noopener noreferrer';e.textContent=(x.k==='intl'?'🌍 ':'🇨🇩 ')+x.l;b.appendChild(e)})}
+function typeIn(el,text,done){const w=text.split(/(\s+)/);let i=0,acc='';skipType=false;const box=el.closest('.m');box.classList.add('typing');box.onclick=()=>{skipType=true};
+ const step=()=>{if(skipType||i>=w.length){el.innerHTML=fmtT(text);box.classList.remove('typing');box.onclick=null;done&&done();endScroll();return}acc+=w.slice(i,i+4).join('');i+=4;el.innerHTML=fmtT(acc);endScroll();setTimeout(step,30)};step()}
+function msgEl(m,type){const d=document.createElement('div');d.className='m '+(m.r==='u'?'mu':'ma');const a=m.r==='a';
+ d.innerHTML=`<div class="mt"></div>${a?'<div class="srcs"></div>':''}<div class="mmeta">${hm(m.ts||Date.now())}</div><div class="mtools"><button data-a="copy">Copier</button>${a?'<button data-a="share">Partager</button><button data-a="sel">Tout sélectionner</button>':''}</div>`;
+ const mt=d.querySelector('.mt');
+ if(!a)mt.textContent=m.t;else if(type)typeIn(mt,m.t,()=>fillSrc(d,m));else{mt.innerHTML=fmtT(m.t);fillSrc(d,m)}
+ d.querySelectorAll('.mtools button').forEach(b=>b.onclick=()=>{const k=b.dataset.a;
+  if(k==='copy'){(navigator.clipboard?navigator.clipboard.writeText(m.t):Promise.reject()).then(()=>flash(b,'Copié ✓')).catch(()=>{selAll(mt);flash(b,'Sélectionné')})}
+  else if(k==='share'){const s=m.t+'\n\n— Drapp';navigator.share?navigator.share({text:s}).catch(()=>{}):navigator.clipboard&&navigator.clipboard.writeText(s).then(()=>flash(b,'Copié ✓'))}
+  else selAll(mt)});
+ return d}
+function buildAi(el){el.innerHTML=`<div class="aihead"><div><b>Assistant d'étude</b><span class="mute">Documents de Drapp, puis sites officiels</span></div><div class="row"><button class="btn" id="hn">＋ Nouveau</button><button class="btn" id="hh">🕘 Historique</button></div></div><div id="sug2" class="row"></div><div id="chat"></div><div class="composer"><textarea id="aqi" rows="1" placeholder="Écrivez votre question…"></textarea><button class="send" id="asn" aria-label="Envoyer">➤</button></div>`;
+ $('#hn').onclick=()=>{curC=null;renderChat();$('#aqi').focus()};$('#hh').onclick=showHist;
+ const t=$('#aqi');t.oninput=()=>{t.style.height='auto';t.style.height=Math.min(t.scrollHeight,140)+'px'};
+ t.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&innerWidth>700){e.preventDefault();sendQ()}};$('#asn').onclick=sendQ;showSug()}
+function sendQ(){const t=$('#aqi'),v=t.value;if(!v.trim()||busy)return;t.value='';t.style.height='auto';ask(v)}
+function renderChat(){const c=$('#chat');if(!c)return;c.innerHTML='';
+ if(!curC||!curC.msgs.length){c.innerHTML='<div class="card" style="text-align:center"><div style="font-size:30px">✨</div><b>Bonjour, que souhaitez-vous comprendre ?</b><p class="mute">Posez une question, même pratique : je m\'appuie d\'abord sur les documents de Drapp, puis sur les sites officiels (RDC en priorité, international ensuite).</p></div>';return}
+ curC.msgs.forEach(m=>c.appendChild(msgEl(m,false)))}
+function aiInit(){const el=$('#v-ai');
+ if(STATIC){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Bientôt disponible.</p></div>';return}
+ if(locked()){el.innerHTML='<div class="card"><h3 style="margin:0 0 6px">Assistant d\'étude</h3><p class="mute">Réservé aux membres Premium.</p></div>'+payCard(meta());bindPay();return}
+ if(!$('#chat')){buildAi(el);if(!curC&&CH.length)curC=CH[0];renderChat()}}
+async function ask(q){show('ai');q=(q||'').trim();if(!q||busy)return;
+ if(!curC){curC={id:'c'+Date.now(),title:q.slice(0,60),t:Date.now(),msgs:[]};CH.unshift(curC)}
+ if(!$('#chat .m'))$('#chat').innerHTML='';
+ const hist=curC.msgs.slice(-6).map(m=>({r:m.r,t:m.t})),um={r:'u',t:q,ts:Date.now()};
+ curC.msgs.push(um);curC.t=Date.now();CH.sort((a,b)=>b.t-a.t);chSave();$('#chat').appendChild(msgEl(um,false));
+ busy=true;const w=document.createElement('div');w.className='m ma';w.innerHTML='<div class="dots"><i></i><i></i><i></i></div>';$('#chat').appendChild(w);endScroll();
+ try{const r=await post('assistant',{id:me.id,token:me.token,mode:'ask',q,hist});w.remove();
+  if(r.error==='premium'){curC.msgs.pop();chSave();$('#chat').lastChild.remove();aiInit();busy=false;return}
+  const am={r:'a',t:r.answer||'Une erreur est survenue.',ts:Date.now(),refs:(r.refs||[]).slice(0,3),web:(r.web||[]).slice(0,4)};
+  curC.msgs.push(am);curC.t=Date.now();chSave();$('#chat').appendChild(msgEl(am,true))}
+ catch(e){w.remove();const n=document.createElement('div');n.className='mute';n.style.textAlign='center';n.textContent='Pas de connexion internet. Votre question est conservée : réessayez.';$('#chat').appendChild(n)}
+ busy=false}
+function showHist(){let h=$('#hist');if(!h){h=document.createElement('div');h.id='hist';h.className='sheet';document.body.appendChild(h)}
+ h.classList.add('on');h.innerHTML=`<div class="sheetc"><div class="row" style="justify-content:space-between"><h3 style="margin:0">Conversations</h3><button class="btn" id="hc">Fermer</button></div>${CH.length?CH.map(c=>`<div class="u hi" data-c="${c.id}"><b>${esc(c.title)}</b><div class="mute">${new Date(c.t).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})} · ${c.msgs.length} messages</div><button class="btn" data-x="${c.id}" style="margin-top:6px">Supprimer</button></div>`).join(''):'<p class="mute">Aucune conversation enregistrée.</p>'}</div>`;
+ $('#hc').onclick=()=>h.classList.remove('on');
+ $$('#hist .hi').forEach(e=>e.onclick=ev=>{if(ev.target.dataset.x)return;curC=CH.find(c=>c.id===e.dataset.c);h.classList.remove('on');renderChat();endScroll()});
+ $$('#hist [data-x]').forEach(b=>b.onclick=()=>{if(!confirm('Supprimer cette conversation ?'))return;CH=CH.filter(c=>c.id!==b.dataset.x);if(curC&&curC.id===b.dataset.x)curC=null;chSave();showHist();renderChat()})}
+function showSug(){const h=(topics||[]).map(t=>`<button class="chip" data-q="${esc(t)}">🎯 ${esc(t)}</button>`).join('');['#sug','#sug2'].forEach(s=>{const e=$(s);if(e)e.innerHTML=(s==='#sug'&&h?'<h2 class="h l3">Sujets d\'étude du jour</h2><div class="row">'+h+'</div>':h)});$$('[data-q]').forEach(b=>b.onclick=()=>{aiInit();ask(b.dataset.q)})}
+async function sugLoad(){if(STATIC||locked())return;try{const r=await post('assistant',{id:me.id,token:me.token,mode:'suggest'});if(r.topics){topics=r.topics;showSug()}}catch(e){}}
+/* groupe d'étude public (anonyme) */
+const GAPI=(CFG.api||'').replace(/drapp$/,'drapp-groupe');
+const gcall=(b,h)=>fetch(GAPI,{method:'POST',headers:Object.assign({'content-type':'application/json'},h||{}),body:JSON.stringify(b)}).then(r=>r.json().then(j=>Object.assign(j,{_s:r.status})));
+let GM=[],gInit=false,gReply=null,gMore=false;
+const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
+function dayLabel(t){const d=new Date(t),n=new Date(),y=new Date(n);y.setDate(n.getDate()-1);const k=x=>x.toDateString();return k(d)===k(n)?"Aujourd'hui":k(d)===k(y)?'Hier':d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:d.getFullYear()!==n.getFullYear()?'numeric':undefined})}
+function gRender(stick){const L=$('#gl');if(!L)return;let last='',h='';
+ for(const m of GM){const dl=dayLabel(m.t);if(dl!==last){h+=`<div class="dsep"><span>${esc(dl)}</span></div>`;last=dl}
+  h+=`<div class="gm${m.mine?' mine':''}" data-id="${m.id}"><div class="gav" style="background:hsl(${hue(m.a)} 55% 45%)">${esc(m.a.slice(-2))}</div><div class="gb"><div class="gh"><b>${m.mine?'Vous · ':''}${esc(m.a)}</b> · ${hm(m.t)}</div>${m.rq?`<div class="gq"><b>${esc(m.rq.a)}</b> : ${esc(m.rq.t)}</div>`:''}<div class="gt">${esc(m.b)}</div><div class="gx"><button data-r="${m.id}">↩︎ Répondre</button><button data-c="${m.id}">Copier</button></div></div></div>`}
+ L.innerHTML=h||'<p class="mute" style="text-align:center">Aucun message pour l\'instant. Lancez la discussion !</p>';
+ $('#gm').style.display=gMore?'flex':'none';
+ $$('#gl [data-r]').forEach(b=>b.onclick=()=>{const m=GM.find(x=>x.id==b.dataset.r);gReply=m;const r=$('#gr');r.style.display='block';r.innerHTML=`↩︎ Réponse à <b>${esc(m.a)}</b> : ${esc(m.b.slice(0,90))} <button class="btn" id="gx" style="padding:2px 8px;margin-left:6px">✕</button>`;$('#gx').onclick=()=>{gReply=null;r.style.display='none'};$('#gi').focus()});
+ $$('#gl [data-c]').forEach(b=>b.onclick=()=>{const m=GM.find(x=>x.id==b.dataset.c);navigator.clipboard&&navigator.clipboard.writeText(m.b).then(()=>flash(b,'Copié ✓'))});
+ if(stick)setTimeout(()=>scrollTo({top:document.body.scrollHeight}),30)}
+function grpInit(){const el=$('#v-grp');
+ if(!$('#gl')){el.innerHTML=`<div class="aihead"><div><b>Groupe d'étude public</b><span class="mute">Anonyme · débats juridiques ouverts 24 h/24</span></div></div><div class="card mute" style="font-size:12.5px">Les échanges sont publics. Les autres membres vous voient sous un pseudonyme, jamais sous votre nom. Restez courtois, ne partagez aucune information personnelle. Ce n'est pas un avis juridique.</div><div id="gm" class="row" style="display:none;justify-content:center"><button class="btn" id="gmore">Voir les messages plus anciens</button></div><div id="gl"></div><div id="gr" class="replybar" style="display:none"></div><div class="composer"><textarea id="gi" rows="1" maxlength="1500" placeholder="Partagez une connaissance ou posez une question…"></textarea><button class="send" id="gs" aria-label="Envoyer">➤</button></div>`;
+  const t=$('#gi');t.oninput=()=>{t.style.height='auto';t.style.height=Math.min(t.scrollHeight,140)+'px'};
+  $('#gs').onclick=gSend;
+  $('#gmore').onclick=async()=>{try{const r=await gcall({op:'gpull',id:me.id,token:me.token,before:GM[0]&&GM[0].id,limit:40});if(r.msgs){GM=r.msgs.concat(GM);gMore=r.more;gRender(false)}}catch(e){}}}
+ $('#gdot').classList.remove('on');
+ if(!gInit)gLoad();else{gRender(true);gTick()}}
+async function gLoad(){try{const r=await gcall({op:'gpull',id:me.id,token:me.token,limit:40});if(r.msgs){GM=r.msgs;gMore=r.more;gInit=true;gRender(true)}else $('#gl').innerHTML='<p class="mute" style="text-align:center">Groupe indisponible pour le moment.</p>'}catch(e){$('#gl').innerHTML='<p class="mute" style="text-align:center">Connexion internet requise pour le groupe.</p>'}}
+async function gSend(){const t=$('#gi'),v=t.value.trim();if(v.length<2)return;$('#gs').disabled=true;
+ try{const r=await gcall({op:'gpost',id:me.id,token:me.token,body:v,reply_to:gReply&&gReply.id});
+  if(r.ok){t.value='';t.style.height='auto';gReply=null;$('#gr').style.display='none';await gTick(true)}
+  else alert(r.error==='rate'?'Vous écrivez trop vite. Réessayez dans quelques minutes.':'Envoi impossible. Réessayez.')}
+ catch(e){alert('Connexion internet requise.')}
+ $('#gs').disabled=false}
+async function gTick(force){if(!me||!gInit||document.body.classList.contains('locked'))return;const on=$('#v-grp').classList.contains('on');
+ try{const last=GM.length?GM[GM.length-1].id:0;const r=await gcall({op:'gpull',id:me.id,token:me.token,after:last});
+  if(r.msgs&&r.msgs.length){const near=innerHeight+scrollY>document.body.scrollHeight-160;GM=GM.concat(r.msgs);if(on)gRender(force||near);else if(r.msgs.some(m=>!m.mine))$('#gdot').classList.add('on')}}catch(e){}}
+setInterval(()=>{if(!document.hidden)gTick()},8000);
+async function adminGroup(){const H=()=>({'x-admin-key':sessionStorage.getItem('ak')||''});let L=[];try{const r=await gcall({op:'gadmin',action:'glist'},H());L=r.msgs||[]}catch(e){}
+ G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Modération du groupe</h2><button class="btn" id="mq">Retour</button></div><p class="mute">Derniers messages. Supprimez ceux qui enfreignent les règles ; ils disparaissent aussitôt pour les membres.</p>${L.map(m=>`<div class="u"><b>${esc(m.a)}</b> <span class="mute">${new Date(m.t).toLocaleString('fr-FR')}${m.del?' · supprimé':''}</span><div style="margin:4px 0;white-space:pre-wrap;word-break:break-word">${esc(m.b)}</div><button class="btn" data-m="${m.id}" data-a="${m.del?'grestore':'gdel'}">${m.del?'Rétablir':'Supprimer'}</button></div>`).join('')||'<p class="mute">Aucun message.</p>'}</div></div>`);
+ $('#mq').onclick=()=>adminList();$$('[data-m]').forEach(b=>b.onclick=async()=>{await gcall({op:'gadmin',action:b.dataset.a,id:b.dataset.m},H());adminGroup()})}
+
 function toCover(){try{localStorage.removeItem('st')}catch(e){}document.body.classList.add('locked');cover()}
-function logout(){if(!confirm('Se déconnecter et effacer les données de ce téléphone ?'))return;['me','data','ver','meta','st','pend'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});me=null;D=null;toCover()}
-(function(){const st=ld('st'),d=ld('data');if(me&&d&&st&&Date.now()-st.t<432e5){initApp(d);restore();if(!STATIC)check(true)}else{cover();if(!STATIC&&me&&d)check(true)}})();
+function logout(){if(!confirm('Se déconnecter et effacer les données de ce téléphone ?'))return;['me','data','ver','meta','st','pend'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});me=null;D=null;setData(null);CH=[];curC=null;idbSet('chats',null);gInit=false;GM=[];toCover()}
+(async function(){await chLoad();let v=await idbGet('data');if(!v){try{const o=JSON.parse(localStorage.getItem('data'));if(o){v=o;idbSet('data',o)}localStorage.removeItem('data')}catch(e){}}DC=v;
+ const st=ld('st'),d=DC;if(me&&d&&st&&Date.now()-st.t<432e5){initApp(d);restore();if(!STATIC)check(true)}else{cover();if(!STATIC&&me&&d)check(true)}})();
 if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
 </script></body></html>
