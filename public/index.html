@@ -147,10 +147,26 @@ nav button{position:relative}.dot{position:absolute;top:6px;right:24%;width:9px;
 .gq{border-left:3px solid var(--acc);background:var(--bg);border-radius:6px;padding:4px 8px;margin:2px 0 6px;font-size:12.5px;color:var(--mute)}
 .gx{display:flex;gap:12px;margin-top:4px}.gx button{background:none;border:0;color:var(--pri);font-size:12px;padding:2px 0}
 .replybar{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;padding:6px 10px;font-size:12.5px}
-</style></head><body class="locked"><div id="gate"></div>
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#f59e0b,#4338ca);z-index:200;transition:width .1s}
+#doc.bk{max-width:680px;margin:0 auto}
+.bhead{margin:8px 0 14px;padding:20px 18px;border-radius:22px;background:linear-gradient(135deg,#4338ca,#0891b2);color:#fff}.bhead h1{margin:0 0 8px;font:800 25px/1.2 Georgia,serif;color:#fff}.bmeta{font-size:13px;opacity:.92}
+.bsum{margin:12px 0;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:16px}.bsum a{display:block;padding:7px 0;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);font-size:14.5px;cursor:pointer}.bsum a.s2{padding-left:16px;color:var(--mute);font-size:13px}.bsum a:last-child{border:0}
+#doc.bk h2.h.l1{font:800 26px/1.25 Georgia,serif;margin:46px 0 12px;padding-top:18px;border-top:3px solid var(--acc);color:var(--pri)}
+#doc.bk h2.h.l2{font:700 21px/1.3 Georgia,serif;margin:32px 0 8px;color:var(--pri);border:0}
+#doc.bk h2.h.l3{font:700 17px/1.35 system-ui,sans-serif;margin:24px 0 6px;color:var(--ink);border:0}
+#doc.bk h2.h.l4{font:600 15px system-ui,sans-serif;margin:16px 0 4px;color:var(--mute);border:0}
+#doc.bk article{border:0;background:none;box-shadow:none;padding:0;margin:0;border-radius:0}#doc.bk article>b{display:none}
+#doc.bk article p{font:var(--fs)/1.85 Georgia,'Times New Roman',serif;text-align:justify;hyphens:auto;margin:0 0 .75em;text-indent:1.4em}
+#doc.bk h2.h+article p:first-of-type{text-indent:0}
+#doc.bk h2.h.l1+article p:first-of-type::first-letter,#doc.bk h2.h.l2+article p:first-of-type::first-letter{float:left;font:800 3.1em/.85 Georgia,serif;padding:.08em .1em 0 0;color:var(--pri)}
+.newsb{display:flex;align-items:center;gap:12px;cursor:pointer;background:linear-gradient(135deg,#0f766e,#4338ca);color:#fff;border:0;margin:6px 0 14px}.newsb .mute{color:#e0f2fe}.nbi{font-size:30px}.newsb b{font-size:16px}#nbs{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nw{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin:12px 0;box-shadow:0 6px 20px #0f172a0d}
+.ntag{font-size:12px;font-weight:700;color:var(--pri);margin-bottom:4px}.nw h3{margin:0 0 8px;font:700 18px/1.3 Georgia,serif}.nbd p{margin:0 0 .6em;line-height:1.65;font-size:15.5px}
+.chip.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+</style></head><body class="locked"><div id="prog"></div><div id="gate"></div>
 <header><button id="menu" aria-label="Sommaire">☰</button><h1>Drapp</h1><button id="fm">A−</button><button id="fp">A+</button></header>
 <main>
-<section id="v-lib" class="view on"><div id="daily"></div><div id="sug"></div><div id="lib"></div></section><section id="v-lire" class="view"><div id="doc"></div></section><section id="v-ai" class="view"></section><section id="v-me" class="view"></section><section id="v-grp" class="view"></section>
+<section id="v-lib" class="view on"><div id="daily"></div><div id="sug"></div><div id="lib"></div></section><section id="v-lire" class="view"><div id="doc"></div></section><section id="v-ai" class="view"></section><section id="v-me" class="view"></section><section id="v-grp" class="view"></section><section id="v-news" class="view"></section>
 <section id="v-search" class="view"><input id="q" type="search" placeholder="Rechercher un mot, une expression…" autocomplete="off"><div id="results" class="mute" style="margin-top:10px">Tapez au moins 2 lettres.</div></section>
 <section id="v-notes" class="view"><div id="notes"></div>
 <div class="row" style="margin-top:14px"><button class="btn" id="exp">Exporter mes annotations</button><label class="btn">Importer<input id="imp" type="file" accept="application/json" hidden></label></div>
@@ -174,7 +190,7 @@ const save=()=>{try{localStorage.setItem(K,JSON.stringify(ann))}catch(e){}};
 let fs=+(localStorage.getItem('fs')||18);const setfs=()=>document.documentElement.style.setProperty('--fs',fs+'px');setfs();
 $('#fm').onclick=()=>{fs=Math.max(14,fs-1);localStorage.setItem('fs',fs);setfs()};
 $('#fp').onclick=()=>{fs=Math.min(28,fs+1);localStorage.setItem('fs',fs);setfs()};
-function show(v){curV=v;setTimeout(saveState,0);$$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));if(v==='notes')renderNotes();if(v==='me')renderMe();if(v==='ai')aiInit();if(v==='grp')grpInit();if(v==='lib')renderLib();hideBar()}
+function show(v){curV=v;setTimeout(saveState,0);$$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));$$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));if(v==='notes')renderNotes();if(v==='me')renderMe();if(v==='ai')aiInit();if(v==='grp')grpInit();if(v==='news')newsInit();if(v==='lib')renderLib();hideBar()}
 $$('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
 function go(id){if(id.includes(':')&&(!D||D.id!==id.split(':')[0]))openDoc(id.split(':')[0]);show('lire');$('#drawer').classList.remove('on');const el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)}}
 function paraHTML(a,pi){const t=a.p[pi];const segs=[];ann.forEach(n=>n.segs.forEach(s=>{if(s.a===a.gid&&s.p===pi)segs.push({s:s.s,e:s.e,n})}));
@@ -182,14 +198,18 @@ function paraHTML(a,pi){const t=a.p[pi];const segs=[];ann.forEach(n=>n.segs.forE
  const c=[...cuts].sort((x,y)=>x-y);let h='';for(let i=0;i<c.length-1;i++){const x=c[i],y=c[i+1];const cov=segs.filter(g=>g.s<=x&&g.e>=y);const part=esc(t.slice(x,y));
   if(!cov.length)h+=part;else{const n=cov[cov.length-1].n;h+=`<mark class="c-${n.c}${n.note?' has-note':''}" data-id="${n.id}">${part}</mark>`}}return h}
 function renderArt(a){return `<article id="${a.gid}" data-a="${a.gid}"><b>${esc(a.n)}</b>${a.p.map((_,i)=>`<p data-p="${i}">${paraHTML(a,i)}</p>`).join('')}</article>`}
-function renderDoc(){$('#doc').innerHTML=`<h1 style="font:700 24px Georgia,serif;color:var(--pri);margin:6px 0">${esc(D.title)}</h1>`+D.items.map(x=>x.t==='h'?`<h2 class="h l${x.lvl}" id="h${x.i}">${esc(x.text)}</h2>`:renderArt(x)).join('')}
+function renderDoc(){const bk=D.kind==='book',its=D.items.filter(x=>x.t!=='meta');$('#doc').className=bk?'bk':'';
+ let head=`<h1 style="font:700 24px Georgia,serif;color:var(--pri);margin:6px 0">${esc(D.title)}</h1>`;
+ if(bk){const hs=its.filter(x=>x.t==='h'&&x.lvl<=2);head=`<div class="bhead"><h1>${esc(D.title)}</h1><div class="bmeta">📖 ${D.meta&&D.meta.min?'≈ '+D.meta.min+' min de lecture · ':''}${its.filter(x=>x.t==='h'&&x.lvl===1).length||hs.length} parties</div></div>${hs.length>2?`<div class="bsum"><b>Sommaire</b>${hs.slice(0,80).map(h=>`<a class="${h.lvl>1?'s2':''}" data-g="h${h.i}">${esc(h.text)}</a>`).join('')}</div>`:''}`}
+ $('#doc').innerHTML=head+its.map(x=>x.t==='h'?`<h2 class="h l${x.lvl}" id="h${x.i}">${esc(x.text)}</h2>`:renderArt(x)).join('');
+ $$('#doc .bsum a').forEach(a=>a.onclick=()=>go(a.dataset.g))}
 function refreshArt(id){const a=ALL.find(x=>x.gid===id),el=document.getElementById(id);if(!el)return;el.querySelectorAll('p').forEach(p=>p.innerHTML=paraHTML(a,+p.dataset.p))}
 function daily(){const d=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/864e5);const pool=ALL.filter(a=>!a.annex&&a.p.join(' ').length>90);const a=pool[(d*7919)%pool.length];
  const txt=a.p.join(' ');const q=txt.length>260?txt.slice(0,257).replace(/\s+\S*$/,'')+'…':txt;
  $('#daily').innerHTML=`<div class="card daily"><small>Article du jour · ${new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long'})}</small><q>« ${esc(q)} »</q><div class="row"><span class="mute" style="align-self:center">${esc(a.dt)} · ${esc(a.n)}</span><button class="btn p" id="dgo">Lire l'article</button><button class="btn" id="dsh">Partager</button></div></div>`;
  $('#dgo').onclick=()=>go(a.gid);
  $('#dsh').onclick=()=>{const t=`« ${q} » — ${a.n}, ${D.title}`;navigator.share?navigator.share({text:t}).catch(()=>{}):navigator.clipboard&&navigator.clipboard.writeText(t)}}
-function toc(){let h='';D.items.forEach(x=>{h+=x.t==='h'?`<a class="h${x.lvl}" data-g="h${x.i}">${esc(x.text)}</a>`:`<a class="art" data-g="${x.gid}">${esc(x.n)}</a>`});$('#toc').innerHTML=h;$$('#toc a').forEach(a=>a.onclick=()=>go(a.dataset.g))}
+function toc(){let h='';D.items.forEach(x=>{if(x.t==='meta')return;if(x.t==='h')h+=`<a class="h${x.lvl}" data-g="h${x.i}">${esc(x.text)}</a>`;else if(D.kind!=='book')h+=`<a class="art" data-g="${x.gid}">${esc(x.n)}</a>`});$('#toc').innerHTML=h;$$('#toc a').forEach(a=>a.onclick=()=>go(a.dataset.g))}
 $('#menu').onclick=()=>$('#drawer').classList.add('on');$('#drawer').onclick=e=>{if(e.target.id==='drawer')e.target.classList.remove('on')};
 /* recherche */
 $('#q').oninput=()=>{const q=norm($('#q').value.trim());const R=$('#results');if(q.length<2){R.className='mute';R.textContent='Tapez au moins 2 lettres.';return}
@@ -250,7 +270,7 @@ const post=(p,b,h)=>fetch(CFG.api,{method:'POST',headers:Object.assign({'content
 let me=ld('me'),poll=null;
 const G=h=>{clearInterval(poll);$('#gate').innerHTML=h;$('#gate').scrollTop=0};
 const pm=t=>{const e=$('#pm');if(e)e.textContent=t};
-function buildDocs(d){docs=d.docs;ALL=[];docs.forEach(doc=>{let k=0;(doc.items||[]).forEach(x=>{if(x.t==='h')x.i=k++;else{x.gid=doc.id+':'+x.id;x.did=doc.id;x.dt=doc.title;x.annex=!!doc.parent;ALL.push(x)}})})}
+function buildDocs(d){docs=d.docs;ALL=[];docs.forEach(doc=>{let k=0;(doc.items||[]).forEach(x=>{if(x.t==='h')x.i=k++;else if(x.t==='meta'){doc.kind=x.kind;doc.meta=x}else{x.gid=doc.id+':'+x.id;x.did=doc.id;x.dt=doc.title;x.annex=!!doc.parent;ALL.push(x)}})})}
 function initApp(d){buildDocs(d);document.body.classList.remove('locked');daily();renderLib();show('lib');sugLoad()}
 function form(){G(`<div class="book"><div class="panel"><h2>Inscription</h2><p class="mute">Renseignez votre identité. L'administrateur validera votre accès.</p>
 <label>Nom</label><input id="f1" type="text" autocomplete="family-name"><label>Post-nom</label><input id="f2" type="text"><label>Prénom</label><input id="f3" type="text" autocomplete="given-name">
@@ -283,23 +303,23 @@ function adminLogin(err){G(`<div class="book"><div class="panel"><h2>Administrat
 async function adminList(){try{const r=await adm('list');if(r._s===401){sessionStorage.removeItem('ak');adminLogin('Mot de passe incorrect.');return}
  const U=r.users||[],lab={pending:'En attente',approved:'Validé',rejected:'Refusé',revoked:'Retiré'};
  const m=(f,s)=>f==='all'||(f==='off'?s==='rejected'||s==='revoked':s===f);const cnt=f=>U.filter(u=>m(f,u.status)).length;
- G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Demandes d'accès</h2><span><button class="btn" id="ad">📚 Documents</button> <button class="btn" id="as">🌐 Sites</button> <button class="btn" id="ag">💬 Groupe</button> <button class="btn" id="aq">Quitter</button></span></div>
+ G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Demandes d'accès</h2><span><button class="btn" id="ad">📚 Documents</button> <button class="btn" id="as">🌐 Sites</button> <button class="btn" id="ag">💬 Groupe</button> <button class="btn" id="an">📰 Actus</button> <button class="btn" id="aq">Quitter</button></span></div>
 <div class="row" style="margin:10px 0">${[['pending','En attente'],['approved','Validés'],['off','Refusés/retirés'],['all','Tous']].map(f=>`<button class="btn ${af===f[0]?'p':''}" data-f="${f[0]}">${f[1]} (${cnt(f[0])})</button>`).join('')}</div>
 ${U.filter(u=>m(af,u.status)).map(u=>`<div class="u"><b>${esc(u.nom)} ${esc(u.postnom)} ${esc(u.prenom)}</b><span class="tag">Home ${esc(u.home)}</span><span class="tag st-${u.status}">${lab[u.status]||u.status}</span><div class="mute">${new Date(u.created).toLocaleString('fr-FR')}</div>${u.code?`<input class="codef" readonly value="${u.code}" onclick="this.select()">`:''}${u.premium?'<span class="tag st-approved">Premium</span>':''}${u.pay&&u.pay.status==='claimed'?`<div class="mute">💳 Paiement déclaré : ${esc(u.pay.ref)}</div>`:''}<div class="row" style="margin-top:8px">${u.status==='approved'?`<button class="btn" data-a="revoke" data-i="${u.id}">Retirer l'accès</button>`:`<button class="btn p" data-a="approve" data-i="${u.id}">${u.pay&&u.pay.status==='claimed'?'Valider accès + paiement':'Valider l\'accès'}</button>`}${u.status==='pending'?`<button class="btn" data-a="reject" data-i="${u.id}">Refuser</button>`:''}${u.status==='approved'?`<button class="btn" data-a="newcode" data-i="${u.id}">Nouveau code</button>`:''}${u.pay&&u.pay.status==='claimed'?`<button class="btn p" data-a="confirmpay" data-i="${u.id}">Confirmer paiement</button>`:''}${u.premium?`<button class="btn" data-a="unpremium" data-i="${u.id}">Retirer Premium</button>`:(u.status==='approved'?`<button class="btn" data-a="premium" data-i="${u.id}">Donner Premium</button>`:'')}<button class="btn" data-a="delete" data-i="${u.id}">Supprimer</button></div></div>`).join('')||'<p class="mute">Aucune demande.</p>'}</div></div>`);
- $('#aq').onclick=()=>{sessionStorage.removeItem('ak');cover()};$('#ad').onclick=()=>adminDocs();$('#as').onclick=()=>adminSites();$('#ag').onclick=()=>adminGroup();
+ $('#aq').onclick=()=>{sessionStorage.removeItem('ak');cover()};$('#ad').onclick=()=>adminDocs();$('#as').onclick=()=>adminSites();$('#ag').onclick=()=>adminGroup();$('#an').onclick=()=>adminNews();
  $$('[data-f]').forEach(b=>b.onclick=()=>{af=b.dataset.f;adminList()});
  $$('[data-a]').forEach(b=>b.onclick=async()=>{if(b.dataset.a==='delete'&&!confirm('Supprimer cette demande ?'))return;await adm(b.dataset.a,b.dataset.i);if(b.dataset.a==='approve')af='approved';adminList()})
  }catch(e){adminLogin('Connexion impossible (internet requis).')}}
 /* bibliothèque, assistant, profil, récupération */
 let docs=[],ALL=[],chat=[];
-function openDoc(id){const d=docs.find(x=>x.id===id);if(!d||d.soon)return;D=d;A=ALL.filter(a=>a.did===id);renderDoc();toc();show('lire');scrollTo(0,0)}
+function openDoc(id,resume){const d=docs.find(x=>x.id===id);if(!d||d.soon)return;D=d;A=ALL.filter(a=>a.did===id);renderDoc();toc();show('lire');scrollTo(0,0);if(resume){const y=(ld('pos')||{})[id];if(y)setTimeout(()=>scrollTo(0,y),80)}}
 const SECS=['Droit congolais','Droit international','Les manuels de droit','Ressources juridiques'];
-function renderLib(){const main=docs.filter(d=>!d.parent);const secs=SECS.concat([...new Set(main.map(d=>d.section).filter(x=>x&&!SECS.includes(x)))]);
+function renderLib(){const main=docs.filter(d=>!d.parent&&d.id!=='actus');const secs=SECS.concat([...new Set(main.map(d=>d.section).filter(x=>x&&!SECS.includes(x)))]);
  const card=d=>{const kids=docs.filter(k=>k.parent===d.id),n=(d.items||[]).filter(x=>x.t==='a').length;
-  return `<div class="dc${d.soon?' soon':''}"${d.soon?'':` data-o="${d.id}"`}><div class="ic">${d.icon||'📘'}</div><b>${esc(d.title)}</b><span class="mute">${d.soon?'Bientôt disponible':n+' éléments'}</span>${kids.map(k=>`<button class="chip" data-o="${k.id}">📎 ${esc(k.title)}</button>`).join('')}</div>`};
- $('#lib').innerHTML=secs.map(sec=>{const ds=main.filter(d=>(d.section||'Les manuels de droit')===sec);const man=sec==='Les manuels de droit';if(!ds.length&&!man)return '';
+  return `<div class="dc${d.soon?' soon':''}"${d.soon?'':` data-o="${d.id}"`}><div class="ic">${d.icon||'📘'}</div><b>${esc(d.title)}</b><span class="mute">${d.soon?'Bientôt disponible':(d.meta&&d.meta.min?'📖 ≈ '+d.meta.min+' min de lecture':n+' éléments')}</span>${kids.map(k=>`<button class="chip" data-o="${k.id}">📎 ${esc(k.title)}</button>`).join('')}</div>`};
+ $('#lib').innerHTML=NB+secs.map(sec=>{const ds=main.filter(d=>(d.section||'Les manuels de droit')===sec);const man=sec==='Les manuels de droit';if(!ds.length&&!man)return '';
   return `<h2 class="h l2">${man?'📖 ':''}${esc(sec)}</h2>`+(ds.length?`<div class="grid">${ds.map(card).join('')}</div>`:'<p class="mute">Les manuels ajoutés par l\'administrateur apparaîtront ici.</p>')}).join('');
- $$('#lib [data-o]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();openDoc(e.dataset.o)})}
+ $$('#lib [data-o]').forEach(e=>e.onclick=ev=>{ev.stopPropagation();openDoc(e.dataset.o,true)});$('#nb').onclick=()=>show('news');if(me&&!STATIC)newsPeek()}
 const meta=()=>STATIC?{premium:false,need:false,pay:{number:CFG.payNumber,price:CFG.payPrice},home:(me||{}).home,nom:(me||{}).nom}:(ld('meta')||{});
 const locked=()=>{const m=meta();return m.need&&!m.premium};
 function bindPay(){$$('.paybtn').forEach(b=>b.onclick=async()=>{const c=b.closest('.card'),ref=c.querySelector('.refin').value.trim();if(ref.length<4){c.querySelector('.paymsg').textContent='Référence trop courte.';return}
@@ -323,19 +343,23 @@ async function adminDocs(msg){let L=[];try{const r=await adm('listdocs');L=r.doc
 <p class="mute">Collez un texte (ou choisissez un fichier PDF, Word ou texte) : il est organisé automatiquement en titres, articles et sections, puis publié dans la bibliothèque.</p>
 <label>Titre</label><input id="dt1" type="text" placeholder="Ex. Manuel de droit civil"><label>Espace</label><select id="ds1" class="refin">${SECS.map(x=>`<option>${x}</option>`).join('')}</select>
 <label>Icône</label><input id="di1" type="text" value="📖" maxlength="4"><label>Texte du document</label><textarea id="dx1" rows="7" placeholder="Collez le texte ici…" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px"></textarea>
-<input id="df1" type="file" style="margin:8px 0"><p class="mute" style="margin:0 0 6px">Fichiers acceptés : PDF (avec texte), Word (.docx), texte (.txt, .md).</p><button class="btn p" id="da">Ajouter à la bibliothèque</button><p id="dm" class="${msg&&msg.err?'err':'mute'}">${esc((msg&&msg.t)||'')}</p><hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+<input id="df1" type="file" style="margin:8px 0"><p class="mute" style="margin:0 0 6px">Fichiers acceptés : PDF (avec texte), Word (.docx), texte (.txt, .md).</p><div id="pv"></div><button class="btn p" id="da">Analyser la structure</button><p id="dm" class="${msg&&msg.err?'err':'mute'}">${esc((msg&&msg.t)||'')}</p><hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
 ${L.map(d=>`<div class="u"><b>${esc(d.icon)} ${esc(d.title)}</b><span class="tag">${esc(d.section)}</span><div class="mute">${d.n} éléments</div><button class="btn" data-del="${d.id}" style="margin-top:6px">Supprimer</button></div>`).join('')||'<p class="mute">Aucun document ajouté pour l\'instant.</p>'}</div></div>`);
  $('#dq').onclick=()=>adminList();
  const H=()=>({'x-admin-key':sessionStorage.getItem('ak')||''}),M=(t,e)=>{$('#dm').className=e?'err':'mute';$('#dm').textContent=t};
  $('#df1').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const t=await fileText(f,M);if(t.trim().length<50){M('Aucun texte trouvé (PDF scanné ?). Utilisez un PDF contenant du texte, ou un fichier Word.',1);return}
   $('#dx1').value=t;if(!$('#dt1').value)$('#dt1').value=f.name.replace(/\.[^.]+$/,'');M(`Fichier lu : ${t.length.toLocaleString('fr-FR')} caractères. Vérifiez le titre, puis ajoutez.`)}
   catch(x){M(String(x.message)==='doc'?"Ancien format .doc non pris en charge : enregistrez-le en .docx dans Word, puis réessayez.":'Lecture impossible. Vérifiez votre connexion internet et le fichier.',1)}};
+ let PV=null;
  $('#da').onclick=async()=>{const title=$('#dt1').value.trim(),txt=$('#dx1').value;if(title.length<2||txt.trim().length<20){M('Titre et texte obligatoires.',1);return}
-  $('#da').disabled=true;const parts=[];let cur='';for(const ln of txt.split('\n')){if(cur.length+ln.length>800000&&cur){parts.push(cur);cur=''}cur+=ln+'\n'}if(cur.trim())parts.push(cur);
-  try{let tot=0;for(let i=0;i<parts.length;i++){M(`Envoi ${i+1}/${parts.length}…`);const r=await post('admin',{action:'adddoc',title:parts.length>1?`${title} — Partie ${i+1}/${parts.length}`:title,section:$('#ds1').value,icon:$('#di1').value,text:parts[i]},H());
-   if(!r.ok){$('#da').disabled=false;M(r.error==='empty'?'Aucun contenu exploitable.':'Erreur. Réessayez.',1);return}tot+=r.n}
-   adminDocs({t:`Ajouté : ${tot} éléments publiés${parts.length>1?` en ${parts.length} parties`:''}.`})}
-  catch(e){$('#da').disabled=false;M('Connexion impossible.',1)}};
+  if(!PV||PV.txt!==txt){PV={txt,res:parseBook(txt)};showPreview(PV.res);$('#da').textContent=PV.res.legal?'Publier ce texte de loi':'Publier ce livre';M(PV.res.legal?'Vérifiez, puis publiez.':'Vérifiez le plan ci-dessus : titres et niveaux. Puis publiez.');return}
+  $('#da').disabled=true;
+  try{let tot=0;
+   if(PV.res.legal){const parts=[];let cur='';for(const ln of txt.split('\n')){if(cur.length+ln.length>800000&&cur){parts.push(cur);cur=''}cur+=ln+'\n'}if(cur.trim())parts.push(cur);
+    for(let i=0;i<parts.length;i++){M(`Envoi ${i+1}/${parts.length}…`);const r=await post('admin',{action:'adddoc',title:parts.length>1?`${title} — Partie ${i+1}/${parts.length}`:title,section:$('#ds1').value,icon:$('#di1').value,text:parts[i]},H());if(!r.ok)throw new Error(r.error||'x');tot+=r.n}}
+   else{const B=splitBatches(PV.res.items);for(let i=0;i<B.length;i++){M(`Envoi ${i+1}/${B.length}…`);const r=await pcall({op:'admin',action:'adddoc2',title:B.length>1?`${title} — Partie ${i+1}/${B.length}`:title,section:$('#ds1').value,icon:$('#di1').value,items:[metaOf(B[i])].concat(B[i])},H());if(!r.ok)throw new Error(r.error||'x');tot+=r.n}}
+   adminDocs({t:`Publié : ${tot} blocs de lecture, mis en forme automatiquement.`})}
+  catch(e){$('#da').disabled=false;M(String(e.message)==='big'?'Document trop volumineux : découpez-le en plusieurs fichiers.':'Erreur pendant la publication. Réessayez.',1)}};
  $$('[data-del]').forEach(b=>b.onclick=async()=>{if(!confirm('Supprimer ce document de la bibliothèque ?'))return;await post('admin',{action:'deldoc',id:b.dataset.del},{'x-admin-key':sessionStorage.getItem('ak')||''});adminDocs()})}
 async function adminSites(msg){let r={stats:[],queue:{},errs:[]};try{r=await adm('srcstat')}catch(e){}
  const q=r.queue||{},H=()=>({'x-admin-key':sessionStorage.getItem('ak')||''});
@@ -440,6 +464,94 @@ setInterval(()=>{if(!document.hidden)gTick()},8000);
 async function adminGroup(){const H=()=>({'x-admin-key':sessionStorage.getItem('ak')||''});let L=[];try{const r=await gcall({op:'gadmin',action:'glist'},H());L=r.msgs||[]}catch(e){}
  G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Modération du groupe</h2><button class="btn" id="mq">Retour</button></div><p class="mute">Derniers messages. Supprimez ceux qui enfreignent les règles ; ils disparaissent aussitôt pour les membres.</p>${L.map(m=>`<div class="u"><b>${esc(m.a)}</b> <span class="mute">${new Date(m.t).toLocaleString('fr-FR')}${m.del?' · supprimé':''}</span><div style="margin:4px 0;white-space:pre-wrap;word-break:break-word">${esc(m.b)}</div><button class="btn" data-m="${m.id}" data-a="${m.del?'grestore':'gdel'}">${m.del?'Rétablir':'Supprimer'}</button></div>`).join('')||'<p class="mute">Aucun message.</p>'}</div></div>`);
  $('#mq').onclick=()=>adminList();$$('[data-m]').forEach(b=>b.onclick=async()=>{await gcall({op:'gadmin',action:b.dataset.a,id:b.dataset.m},H());adminGroup()})}
+
+/* mise en forme automatique des livres */
+function parseBook(raw){
+ const txt=String(raw).replace(/\r/g,'').replace(/\u00ad/g,'').replace(/\f/g,'\n');
+ const arts=(txt.match(/^\s*Art(?:icle)?\.?\s*\d+/gim)||[]).length;
+ if(arts>=8)return {legal:true,stats:{art:arts}};
+ let L=txt.split('\n').map(l=>l.replace(/[ \t\u00a0]+/g,' ').trim());
+ const HK=/^(partie|livre|titre|chapitre|section|sous-section|paragraphe|annexe|introduction|conclusion|préface|avant-propos|bibliographie|sommaire|table des matières)\b/i;
+ const nm=l=>l.toLowerCase().replace(/\d+/g,'#'),cnt=new Map();
+ L.forEach(l=>{if(l&&l.length<90&&!HK.test(l)){const k=nm(l);cnt.set(k,(cnt.get(k)||0)+1)}});
+ const pages=Math.max(1,L.filter(l=>!l).length||Math.round(L.length/45));
+ const rep=l=>l&&l.length<90&&!HK.test(l)&&cnt.get(nm(l))>=Math.max(5,Math.round(pages*.3));
+ const NUM=/^(page\s*)?\d{1,4}(\s*\/\s*\d{1,4})?$/i,NUM2=/^[-–—]\s*\d{1,4}\s*[-–—]$/,LEAD=/\.{4,}\s*\d{1,4}$|(\.\s){4,}/;
+ L=L.map(l=>(NUM.test(l)||NUM2.test(l)||LEAD.test(l)||rep(l))?'':l);
+ const st=/^[A-ZÀ-ÖØ-Ý0-9§]/;
+ const rank=l=>{if(!l||l.length>110||!st.test(l))return 0;
+  const kw=/^(chapitre|titre|partie|livre|section)\b/i.test(l);if(/[.;,]$/.test(l)&&!kw)return 0;
+  if(/^(partie|livre)\b/i.test(l)||/^(première|deuxième|troisième|quatrième|cinquième)\s+partie\b/i.test(l))return 1;
+  if(/^titre\b/i.test(l))return 1.5;if(/^chapitre\b/i.test(l))return 2;if(/^(sous-)?section\b/i.test(l))return 3;if(/^(paragraphe|§)/i.test(l))return 4;
+  if(/^(introduction|conclusion|préface|avant-propos|bibliographie|annexes?|sommaire|table des matières|remerciements)(\s+générale)?\s*:?$/i.test(l))return 1;
+  if(l.length>90)return 0;
+  if(/^[IVXL]{1,6}\s*[.)–-]\s+\S/.test(l))return 3;
+  if(/^\d+(\.\d+){1,3}\s+\S/.test(l))return 4;
+  if(/^\d{1,2}\s*[.)]\s+[A-ZÉÈÀ]/.test(l)&&!/[.;:,]$/.test(l))return 3.5;
+  if(/^[A-Z]\s*[.)]\s+[A-ZÉÈÀ]/.test(l)&&!/[.;:,]$/.test(l))return 4;
+  if(l.length>=4&&l===l.toUpperCase()&&/[A-ZÀ-Ý]{3}/.test(l)&&!/\d{3,}/.test(l))return 3;
+  return 0};
+ const lens=L.filter(l=>l.length>45).map(l=>l.length).sort((a,b)=>a-b),med=lens.length?lens[Math.floor(lens.length/2)]:80;
+ const items=[];let cur='',blank=false,ll=0;const push=()=>{if(cur.trim().length>1)items.push({t:'p',s:cur.trim()});cur=''};
+ for(let i=0;i<L.length;i++){const l=L[i];
+  if(!l){blank=true;continue}
+  const r=rank(l);
+  if(r){push();let text=l;
+   if(/^(chapitre|titre|partie|livre|section)\s+([ivxlc]+|\d+|premier|première|unique)\s*[.:]?$/i.test(l)){let j=i+1;while(j<L.length&&!L[j])j++;
+    if(j<L.length&&L[j].length<=90&&!/[.;,]$/.test(L[j])&&(!rank(L[j])||L[j]===L[j].toUpperCase())){text=l.replace(/[.:]$/,'')+' : '+L[j];i=j}}
+   items.push({t:'h',r,text:text.slice(0,160)});blank=false;cur='';ll=0;continue}
+  if(!cur){cur=l;ll=l.length;blank=false;continue}
+  if(/[a-zà-ÿ]-$/.test(cur)&&/^[a-zà-ÿ]/.test(l)){cur=cur.slice(0,-1)+l;ll=l.length;blank=false;continue}
+  const endP=/[.!?:;»”")\]]$/.test(cur),bullet=/^([•·▪◦*]|[-–—]\s|\(?[a-z0-9]{1,2}[.)]\s|\d+°)/.test(l);
+  const newP=bullet||(blank&&(endP||ll<med*.6))||(endP&&ll<med*.72);
+  if(newP){push();cur=l}else cur+=' '+l;
+  ll=l.length;blank=false}
+ push();
+ const nh=items.filter(x=>x.t==='h').length;
+ const used=[...new Set(items.filter(x=>x.t==='h').map(h=>h.r))].sort((a,b)=>a-b),lv=new Map(used.map((r,i)=>[r,Math.min(4,i+1)]));
+ const out=[];let curH='',buf=[],size=0,k=0,since=0,part=0;
+ const flushB=()=>{if(buf.length){out.push({t:'a',n:(curH||'Texte').slice(0,70)+(k?` (suite ${k+1})`:''),p:buf});k++;buf=[];size=0}};
+ for(const it of items){
+  if(it.t==='h'){flushB();curH=it.text;k=0;since=0;out.push({t:'h',lvl:lv.get(it.r),text:it.text})}
+  else{if(!nh&&since>6000){flushB();part++;curH='Partie '+(part+1);k=0;since=0;out.push({t:'h',lvl:1,text:curH})}
+   if(!nh&&!out.length){part=0;curH='Partie 1';out.push({t:'h',lvl:1,text:curH})}
+   buf.push(it.s);size+=it.s.length;since+=it.s.length;if(size>1800)flushB()}}
+ flushB();
+ const words=out.filter(x=>x.t==='a').reduce((a,b)=>a+b.p.join(' ').split(/\s+/).length,0);
+ return {legal:false,items:out,stats:{titres:out.filter(x=>x.t==='h').length,para:items.filter(x=>x.t==='p').length,words,min:Math.max(1,Math.round(words/200)),auto:!nh}}}
+function splitBatches(items,max=650000){const B=[];let cur=[],sz=0;for(const x of items){const w=x.t==='a'?x.p.join('').length+80:x.text.length+40;if(sz+w>max&&cur.length&&(x.t==='h'||sz+w>max*1.15)){B.push(cur);cur=[];sz=0}cur.push(x);sz+=w}if(cur.length)B.push(cur);return B}
+const metaOf=its=>{const w=its.filter(x=>x.t==='a').reduce((a,b)=>a+b.p.join(' ').split(/\s+/).length,0);return {t:'meta',kind:'book',words:w,min:Math.max(1,Math.round(w/200))}};
+function showPreview(res){const pv=$('#pv');if(!pv)return;
+ if(res.legal){pv.innerHTML=`<div class="bsum"><b>Texte de loi détecté</b><p class="mute" style="margin:4px 0">${res.stats.art} articles repérés : le texte sera publié article par article.</p></div>`;return}
+ const s=res.stats;pv.innerHTML=`<div class="bsum"><b>Aperçu de la structure</b><p class="mute" style="margin:4px 0">${s.titres} titres · ${s.para} paragraphes · ${s.words.toLocaleString('fr-FR')} mots · ≈ ${s.min} min de lecture${s.auto?' · aucun titre détecté : le texte est découpé en parties régulières':''}</p>${res.items.filter(x=>x.t==='h').slice(0,60).map(h=>`<div style="padding:2px 0 2px ${(h.lvl-1)*14}px;font-size:${h.lvl===1?14:13}px;${h.lvl===1?'font-weight:700':'color:var(--mute)'}">${esc(h.text)}</div>`).join('')||'<p class="mute">Aucun titre.</p>'}</div>`}
+/* actualités du droit */
+const PAPI=(CFG.api||'').replace(/drapp$/,'drapp-plus');
+const pcall=(b,h)=>fetch(PAPI,{method:'POST',headers:Object.assign({'content-type':'application/json'},h||{}),body:JSON.stringify(b)}).then(r=>r.json().then(j=>Object.assign(j,{_s:r.status})));
+const NB='<div class="card newsb" id="nb"><span class="nbi">📰</span><div style="flex:1;min-width:0"><b>Actualités du droit</b><div class="mute" id="nbs">Nouveautés chaque jour, tirées des sites officiels</div></div><span>›</span></div>';
+let NW=[],nKind='all',nMore=false;
+async function newsPeek(){try{const r=await pcall({op:'news',id:me.id,token:me.token,limit:1});if(r.items&&r.items[0]&&$('#nbs'))$('#nbs').textContent=r.items[0].title}catch(e){}}
+const tagOf=n=>n.kind==='savoir'?(n.scope==='intl'?'💡 À retenir · international':'💡 À retenir · droit congolais'):(n.scope==='intl'?'🌍 International · touche la RDC':'🇨🇩 Actualité · RDC');
+function nRender(){const L=$('#nl');if(!L)return;let last='',h='';
+ for(const n of NW){const dl=dayLabel(Date.parse(n.day+'T12:00:00'));if(dl!==last){h+=`<div class="dsep"><span>${esc(dl)}</span></div>`;last=dl}
+  h+=`<article class="nw" data-n="${n.id}"><div class="ntag">${tagOf(n)}</div><h3>${esc(n.title)}</h3><div class="nbd">${fmtT(n.body)}</div><div class="srcs">${(n.sources||[]).map(x=>x.u?`<a class="chip" href="${esc(x.u)}" target="_blank" rel="noopener noreferrer">🔗 ${esc(x.l||'Source')}</a>`:`<button class="chip" data-g="${esc(x.g)}">📎 ${esc(x.l||'Document')}</button>`).join('')}</div><div class="mtools"><button data-sh="${n.id}">Partager</button><button data-cp="${n.id}">Copier</button></div></article>`}
+ L.innerHTML=h||'<p class="mute" style="text-align:center">Pas encore d\'actualité. Les nouveautés arrivent chaque jour.</p>';
+ $('#nmore').style.display=nMore?'inline-block':'none';
+ $$('#nl [data-g]').forEach(b=>b.onclick=()=>go(b.dataset.g));
+ $$('#nl [data-sh]').forEach(b=>b.onclick=()=>{const n=NW.find(x=>x.id==b.dataset.sh),t=`${n.title}\n\n${n.body}\n\n— Drapp`;navigator.share?navigator.share({text:t}).catch(()=>{}):navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>flash(b,'Copié ✓'))});
+ $$('#nl [data-cp]').forEach(b=>b.onclick=()=>{const n=NW.find(x=>x.id==b.dataset.cp);navigator.clipboard&&navigator.clipboard.writeText(n.title+'\n\n'+n.body).then(()=>flash(b,'Copié ✓'))})}
+async function nLoad(more){try{const r=await pcall({op:'news',id:me.id,token:me.token,limit:20,kind:nKind==='all'?undefined:nKind,before:more&&NW.length?NW[NW.length-1].id:undefined});
+  if(r.items){NW=more?NW.concat(r.items):r.items;nMore=!!r.more;nRender();if(nKind==='all'&&!more)idbSet('news',NW)}}
+ catch(e){if(!more){NW=(nKind==='all'&&await idbGet('news'))||[];nMore=false;nRender()}}}
+function newsInit(){const el=$('#v-news');
+ if(!$('#nl')){el.innerHTML=`<div class="aihead"><div><b>Actualités du droit</b><span class="mute">Générées chaque jour à partir de sources officielles</span></div></div><div class="row" id="nf" style="margin-bottom:6px">${[['all','Tout'],['rdc','🇨🇩 RDC'],['intl','🌍 International'],['savoir','💡 À retenir']].map(f=>`<button class="chip${f[0]==='all'?' on':''}" data-k="${f[0]}">${f[1]}</button>`).join('')}</div><div id="nl"></div><div class="row" style="justify-content:center"><button class="btn" id="nmore" style="display:none">Voir les plus anciennes</button></div><p class="mute" style="text-align:center;font-size:12px">Résumés rédigés automatiquement à partir de sources officielles : vérifiez toujours le texte original.</p>`;
+  $$('#nf .chip').forEach(b=>b.onclick=()=>{nKind=b.dataset.k;$$('#nf .chip').forEach(x=>x.classList.toggle('on',x===b));nLoad(false)});$('#nmore').onclick=()=>nLoad(true)}
+ nLoad(false)}
+async function adminNews(logs){const H=()=>({'x-admin-key':sessionStorage.getItem('ak')||''});let L=[];try{const r=await pcall({op:'admin',action:'nlist'},H());L=r.items||[]}catch(e){}
+ G(`<div class="book" style="align-items:flex-start"><div class="panel"><div class="row" style="justify-content:space-between"><h2>Actualités</h2><button class="btn" id="nq">Retour</button></div><p class="mute">Générées automatiquement deux fois par jour. Vous pouvez lancer la génération maintenant ou supprimer un contenu.</p><button class="btn p" id="ng">Générer maintenant</button><pre id="nlog" class="mute" style="white-space:pre-wrap;word-break:break-word;font-size:11px">${esc((logs||[]).join('\n'))}</pre>${L.map(n=>`<div class="u"><b>${esc(n.title)}</b><div class="mute">${esc(n.day)} · ${tagOf(n)}</div><button class="btn" data-nd="${n.id}" style="margin-top:6px">Supprimer</button></div>`).join('')||'<p class="mute">Aucun contenu.</p>'}</div></div>`);
+ $('#nq').onclick=()=>adminList();
+ $('#ng').onclick=async()=>{$('#ng').disabled=true;$('#nlog').textContent='Génération en cours (jusqu\'à une minute)…';try{const r=await pcall({op:'admin',action:'ngen'},H());adminNews(r.log||['Terminé'])}catch(e){$('#nlog').textContent='Erreur de connexion'}};
+ $$('[data-nd]').forEach(b=>b.onclick=async()=>{await pcall({op:'admin',action:'ndel',id:b.dataset.nd},H());adminNews(logs)})}
+addEventListener('scroll',()=>{const pr=$('#prog');if(!pr)return;const on=$('#v-lire').classList.contains('on')&&!document.body.classList.contains('locked');if(!on){pr.style.width='0';return}const h=document.documentElement.scrollHeight-innerHeight;pr.style.width=(h>0?Math.min(100,scrollY/h*100):0)+'%';clearTimeout(window._ps);window._ps=setTimeout(()=>{if(!D)return;const p=ld('pos')||{};p[D.id]=Math.round(scrollY);sv('pos',p)},600)},{passive:true});
 
 function toCover(){try{localStorage.removeItem('st')}catch(e){}document.body.classList.add('locked');cover()}
 function logout(){if(!confirm('Se déconnecter et effacer les données de ce téléphone ?'))return;['me','data','ver','meta','st','pend'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});me=null;D=null;setData(null);CH=[];curC=null;idbSet('chats',null);gInit=false;GM=[];toCover()}
