@@ -29,6 +29,7 @@ sup.cite{cursor:pointer;color:var(--pri);font-weight:700;padding:0 1px;font-size
 .sr i{font-style:normal;font-weight:700;color:var(--pri);flex:none;min-width:1.6em}.sr small{display:block;color:var(--mute);font-size:11px}.sr.flash{outline:2px solid var(--acc)}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(112px + env(safe-area-inset-bottom));background:#0f172af2;color:#fff;border-radius:999px;padding:8px 14px;font-size:13px;z-index:90;display:none;max-width:90vw;text-align:center}
 .jw .chip{display:block;width:100%;margin:6px 0;white-space:normal}
+.send.nw{background:var(--card);color:var(--pri);border:1px solid var(--line);font-size:22px}
 `;
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
 
@@ -72,6 +73,7 @@ sup.cite{cursor:pointer;color:var(--pri);font-weight:700;padding:0 1px;font-size
       const jb = d.querySelector('.jb'), sl = d.querySelector('.srcl'), S = srcOf(m);
       if (m.v === true && m.found !== false) jb.innerHTML += '<span class="badge ok">✔ Vérifié sur les sources</span>';
       if (m.found === false) jb.innerHTML += '<span class="badge no">ℹ️ Aucune source fiable trouvée</span>';
+      if (m.fb) jb.innerHTML += '<span class="badge warn">⚠️ Mode de secours (serveur Juriste indisponible : ' + esc(String(m.fb)) + ')</span>';
       if (m.weak) jb.innerHTML += '<span class="badge warn">⚠️ Source non officielle : à vérifier</span>';
       S.forEach((x) => {
         const ki = KIND[x.k] || KIND.rdc, inner = '<i>' + (x.n ? '[' + x.n + ']' : ki[0]) + '</i><span>' + esc(x.l) + '<small>' + ki[0] + ' ' + ki[1] + '</small></span>';
@@ -93,7 +95,7 @@ sup.cite{cursor:pointer;color:var(--pri);font-weight:700;padding:0 1px;font-size
 
   /* ---------- écran de l'assistant ---------- */
   window.buildAi = function (el) {
-    el.innerHTML = '<div class="jbar"><button class="btn" id="jmenu" aria-label="Conversations">☰</button><div class="jt"><b id="jtt">Nouvelle conversation</b><span id="jtc"></span></div><button class="btn p" id="jnew" aria-label="Nouvelle conversation">＋</button></div><div id="chat"></div><div class="composer"><textarea id="aqi" rows="1" placeholder="Posez une question de droit…"></textarea><button class="send" id="asn" aria-label="Envoyer">➤</button></div>';
+    el.innerHTML = '<div class="jbar"><button class="btn" id="jmenu" aria-label="Conversations">☰</button><div class="jt"><b id="jtt">Nouvelle conversation</b><span id="jtc"></span></div></div><div id="chat"></div><div class="composer"><button class="send nw" id="jnew" aria-label="Nouvelle conversation" title="Nouvelle conversation">＋</button><textarea id="aqi" rows="1" placeholder="Posez une question de droit…"></textarea><button class="send" id="asn" aria-label="Envoyer">➤</button></div>';
     $('#jmenu').onclick = openCv;
     $('#jnew').onclick = () => { curC = null; renderChat(); $('#aqi').focus(); };
     const t = $('#aqi'); t.oninput = () => { t.style.height = 'auto'; t.style.height = Math.min(t.scrollHeight, 140) + 'px'; };
@@ -131,7 +133,8 @@ sup.cite{cursor:pointer;color:var(--pri);font-weight:700;padding:0 1px;font-size
     if (r && r._s === 402) { c.msgs.pop(); chSave(); aiInit(); return; }
     if (!r || !r.answer) { /* serveur indisponible : ancien assistant */
       c.msgs.pop(); renderChat();
-      if (typeof askOld === 'function') return askOld(q);
+      const code = r ? (r._s || '?') : 'réseau';
+      if (typeof askOld === 'function') { await askOld(q); const l = curC && curC.msgs[curC.msgs.length - 1]; if (l && l.r === 'a') { l.fb = code; chSave(); renderChat(); endScroll(); } }
       return;
     }
     const am = { r: 'a', t: r.answer, ts: Date.now(), sources: r.sources || [], found: r.found !== false, v: !!r.verified, weak: !!r.weak };
