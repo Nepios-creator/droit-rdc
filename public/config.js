@@ -90,5 +90,49 @@ window.DRAPP = {
     new MutationObserver(inject).observe(v, { childList: true });
     inject();
   }
+  // Invitation à installer Drapp, affichée une seule fois, à la toute première ouverture.
+  var SEEN = 'drapp_install_seen';
+  var ua = navigator.userAgent;
+  var isIos = /iphone|ipad|ipod/i.test(ua);
+  var isMobile = isIos || /android/i.test(ua);
+  var getSeen = function () { try { return localStorage.getItem(SEEN) === '1'; } catch (e) { return false; } };
+  var setSeen = function () { try { localStorage.setItem(SEEN, '1'); } catch (e) {} };
+  var hideBanner = function () { var b = document.getElementById('instbanner'); if (b) b.remove(); };
+
+  function showBanner() {
+    if (getSeen() || installed() || document.getElementById('instbanner')) return;
+    if (!deferred && !isMobile) return;
+    var b = document.createElement('div');
+    b.id = 'instbanner';
+    b.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:300;max-width:460px;margin:0 auto;background:#fff;color:#0f172a;border-radius:20px;padding:14px 16px;box-shadow:0 14px 40px #0006;font:15px/1.4 system-ui,sans-serif';
+    var msg = deferred
+      ? "Gardez Drapp sur votre écran d'accueil, comme une vraie application."
+      : (isIos
+        ? "Dans Safari, touchez le bouton Partager, puis « Sur l'écran d'accueil »."
+        : "Dans Chrome, touchez le menu ⋮, puis « Installer l'application ».");
+    var btn = 'border:0;border-radius:999px;padding:9px 16px;font-size:14px;';
+    b.innerHTML =
+      '<div style="font-weight:700;font-size:16px">📲 Installer Drapp</div>' +
+      '<div style="color:#475569;margin:4px 0 10px">' + msg + '</div>' +
+      '<div style="display:flex;gap:8px;justify-content:flex-end">' +
+        '<button id="instlater" style="' + btn + 'background:#e2e8f0;color:#0f172a">' + (deferred ? 'Plus tard' : "J'ai compris") + '</button>' +
+        (deferred ? '<button id="instgo" style="' + btn + 'background:linear-gradient(120deg,#4338ca,#0891b2);color:#fff;font-weight:700">Installer</button>' : '') +
+      '</div>';
+    document.body.appendChild(b);
+    b.querySelector('#instlater').onclick = function () { setSeen(); hideBanner(); };
+    var go = b.querySelector('#instgo');
+    if (go) go.onclick = function () {
+      setSeen(); hideBanner();
+      if (deferred) { deferred.prompt(); deferred.userChoice.then(function () { deferred = null; }); }
+    };
+  }
+
+  window.addEventListener('beforeinstallprompt', function () {
+    if (document.getElementById('instbanner')) { hideBanner(); showBanner(); }
+  });
+  window.addEventListener('appinstalled', function () { setSeen(); hideBanner(); });
+  var armBanner = function () { setTimeout(showBanner, 2500); };
+  if (document.readyState === 'complete') armBanner(); else window.addEventListener('load', armBanner);
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
