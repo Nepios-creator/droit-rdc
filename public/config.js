@@ -11,17 +11,68 @@ window.DRAPP = {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', load); else load();
 })();
 
-// Installer l'application en scannant un code QR (onglet « Moi » = paramètres).
+// Installation de Drapp : page d'accueil « Installer l'application » + carte avec code QR dans l'onglet « Moi ».
 (function () {
   var QR_LIB = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+  var SEEN = 'drapp_install_seen';
   var deferred = null;
-
-  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; });
+  var ua = navigator.userAgent;
+  var isIos = /iphone|ipad|ipod/i.test(ua);
+  var isMobile = isIos || /android/i.test(ua);
 
   var appUrl = function () { return location.origin + location.pathname.replace(/index\.html$/, ''); };
   var installed = function () {
     return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
   };
+  var getSeen = function () { try { return localStorage.getItem(SEEN) === '1'; } catch (e) { return false; } };
+  var setSeen = function () { try { localStorage.setItem(SEEN, '1'); } catch (e) {} };
+
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; });
+  window.addEventListener('appinstalled', function () { setSeen(); hideSplash(); });
+
+  var HELP = isIos
+    ? "Dans Safari, touchez le bouton Partager, puis « Sur l'écran d'accueil »."
+    : "Touchez le menu ⋮ de Chrome, puis « Installer l'application ». Si vous ne le voyez pas, ouvrez ce lien dans Chrome.";
+
+  /* ---------- Page d'installation, à la première ouverture ---------- */
+  function hideSplash() { var s = document.getElementById('instsplash'); if (s) s.remove(); }
+
+  function installNow(s) {
+    if (deferred) {
+      var d = deferred; deferred = null;
+      d.prompt();
+      d.userChoice.then(function (r) { if (r && r.outcome === 'accepted') { setSeen(); hideSplash(); } });
+    } else {
+      var h = s.querySelector('#sphelp');
+      h.textContent = HELP;
+      h.style.display = 'block';
+    }
+  }
+
+  function showSplash() {
+    if (getSeen() || installed() || !isMobile || document.getElementById('instsplash')) return;
+    var s = document.createElement('div');
+    s.id = 'instsplash';
+    s.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:400;overflow:auto;background:radial-gradient(circle at 30% 12%,#27338f,#0b1020 70%);color:#fff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;align-items:center;justify-content:center;padding:24px';
+    var btn = 'display:block;width:100%;border-radius:999px;padding:17px 12px;font-size:18px;font-weight:700;margin-top:14px;font-family:inherit;';
+    s.innerHTML =
+      '<div style="width:min(100%,380px);text-align:center">' +
+        '<img src="icon-192.png" alt="" style="width:120px;height:120px;border-radius:30px;box-shadow:0 18px 44px #0008">' +
+        '<h1 style="font-size:36px;font-weight:800;margin:22px 0 6px;letter-spacing:-.02em">Drapp</h1>' +
+        '<p style="margin:0 0 28px;font-size:17px;line-height:1.4;color:#dbe4ff">Le droit congolais, à portée de main.</p>' +
+        '<button id="spgo" style="' + btn + 'border:0;background:linear-gradient(120deg,#8b9cff,#a5b4fc);color:#0b1020">📲 Installer l\'application</button>' +
+        '<div id="sphelp" style="display:none;margin-top:14px;padding:12px 14px;border-radius:14px;background:#ffffff1f;font-size:15px;line-height:1.45;text-align:left"></div>' +
+        '<button id="spopen" style="' + btn + 'background:transparent;border:1px solid #ffffff55;color:#fff;font-weight:600">Ouvrir Drapp directement</button>' +
+        '<p style="margin:22px 4px 0;font-size:14px;line-height:1.5;color:#b9c6ee">Une fois installée, Drapp s\'ouvre comme une vraie application, directement depuis votre écran d\'accueil.</p>' +
+      '</div>';
+    document.body.appendChild(s);
+    s.querySelector('#spgo').onclick = function () { installNow(s); };
+    s.querySelector('#spopen').onclick = function () { setSeen(); hideSplash(); };
+  }
+
+  if (document.body) showSplash(); else document.addEventListener('DOMContentLoaded', showSplash);
+
+  /* ---------- Carte « Installer l'application » + code QR (onglet Moi) ---------- */
   var loadQr = function () {
     return new Promise(function (ok, ko) {
       if (window.QRCode) return ok();
@@ -70,10 +121,10 @@ window.DRAPP = {
       inst.textContent = 'Installer sur ce téléphone';
       inst.onclick = function () {
         if (deferred) {
-          deferred.prompt();
-          deferred.userChoice.then(function () { deferred = null; });
+          var d = deferred; deferred = null;
+          d.prompt();
         } else {
-          alert("Android (Chrome) : menu ⋮ → « Installer l'application ».\niPhone (Safari) : Partager → « Sur l'écran d'accueil ».");
+          alert(HELP);
         }
       };
     }
@@ -90,49 +141,5 @@ window.DRAPP = {
     new MutationObserver(inject).observe(v, { childList: true });
     inject();
   }
-  // Invitation à installer Drapp, affichée une seule fois, à la toute première ouverture.
-  var SEEN = 'drapp_install_seen';
-  var ua = navigator.userAgent;
-  var isIos = /iphone|ipad|ipod/i.test(ua);
-  var isMobile = isIos || /android/i.test(ua);
-  var getSeen = function () { try { return localStorage.getItem(SEEN) === '1'; } catch (e) { return false; } };
-  var setSeen = function () { try { localStorage.setItem(SEEN, '1'); } catch (e) {} };
-  var hideBanner = function () { var b = document.getElementById('instbanner'); if (b) b.remove(); };
-
-  function showBanner() {
-    if (getSeen() || installed() || document.getElementById('instbanner')) return;
-    if (!deferred && !isMobile) return;
-    var b = document.createElement('div');
-    b.id = 'instbanner';
-    b.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:300;max-width:460px;margin:0 auto;background:#fff;color:#0f172a;border-radius:20px;padding:14px 16px;box-shadow:0 14px 40px #0006;font:15px/1.4 system-ui,sans-serif';
-    var msg = deferred
-      ? "Gardez Drapp sur votre écran d'accueil, comme une vraie application."
-      : (isIos
-        ? "Dans Safari, touchez le bouton Partager, puis « Sur l'écran d'accueil »."
-        : "Dans Chrome, touchez le menu ⋮, puis « Installer l'application ».");
-    var btn = 'border:0;border-radius:999px;padding:9px 16px;font-size:14px;';
-    b.innerHTML =
-      '<div style="font-weight:700;font-size:16px">📲 Installer Drapp</div>' +
-      '<div style="color:#475569;margin:4px 0 10px">' + msg + '</div>' +
-      '<div style="display:flex;gap:8px;justify-content:flex-end">' +
-        '<button id="instlater" style="' + btn + 'background:#e2e8f0;color:#0f172a">' + (deferred ? 'Plus tard' : "J'ai compris") + '</button>' +
-        (deferred ? '<button id="instgo" style="' + btn + 'background:linear-gradient(120deg,#4338ca,#0891b2);color:#fff;font-weight:700">Installer</button>' : '') +
-      '</div>';
-    document.body.appendChild(b);
-    b.querySelector('#instlater').onclick = function () { setSeen(); hideBanner(); };
-    var go = b.querySelector('#instgo');
-    if (go) go.onclick = function () {
-      setSeen(); hideBanner();
-      if (deferred) { deferred.prompt(); deferred.userChoice.then(function () { deferred = null; }); }
-    };
-  }
-
-  window.addEventListener('beforeinstallprompt', function () {
-    if (document.getElementById('instbanner')) { hideBanner(); showBanner(); }
-  });
-  window.addEventListener('appinstalled', function () { setSeen(); hideBanner(); });
-  var armBanner = function () { setTimeout(showBanner, 2500); };
-  if (document.readyState === 'complete') armBanner(); else window.addEventListener('load', armBanner);
-
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
